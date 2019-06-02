@@ -91,14 +91,14 @@ public class Receiver {
     /**
      * 建立连接
      * TODO: yh 有问题++，可以自行设计
-     * @param r 接受方
+     * @param receiver 接受方
      */
-    static void establishConnection(Receiver r) {
+    static void establishConnection(Receiver receiver) {
         //第2次握手
         while (true) {
-            try (DatagramSocket socket = new DatagramSocket(r.port)) {
+            try (DatagramSocket socket = new DatagramSocket(receiver.port)) {
                 //收
-                DatagramPacket request = new DatagramPacket(new byte[r.mss + Message.HEAD_LENGTH], r.mss + Message.HEAD_LENGTH);
+                DatagramPacket request = new DatagramPacket(new byte[receiver.mss + Message.HEAD_LENGTH], receiver.mss + Message.HEAD_LENGTH);
                 socket.receive(request);
 
                 //验证
@@ -109,15 +109,15 @@ public class Receiver {
                 }
 
                 //更新信息
-                r.setSequence(r.getSequence() + 1);
-                r.setRcvdSequence(recMessage.getRank() + 1);
-                r.setMss(recMessage.getMss());
+                receiver.setSequence(receiver.getSequence() + 1);
+                receiver.setRcvdSequence(recMessage.getRank() + 1);
+                receiver.setMss(recMessage.getMss());
                 //TODO 这里信息状态貌似不对,有问题
-                r.changeState(ReceiverState.LISTEN);
+                receiver.changeState(ReceiverState.LISTEN);
 
                 //准备回复
-                Message toSent = r.getMessage();
-                toSent.setRank(r.getSequence());
+                Message toSent = receiver.getMessage();
+                toSent.setRank(receiver.getSequence());
                 toSent.setSyn(true);
                 toSent.setContent(new byte[0]);
                 toSent.setTime(recMessage.getTime());
@@ -137,22 +137,22 @@ public class Receiver {
 
         //第3次握手的确认
         while (true) {
-            try (DatagramSocket socket = new DatagramSocket(r.port)) {
+            try (DatagramSocket socket = new DatagramSocket(receiver.port)) {
                 //收
-                DatagramPacket request = new DatagramPacket(new byte[r.mss + Message.HEAD_LENGTH], r.mss + Message.HEAD_LENGTH);
+                DatagramPacket request = new DatagramPacket(new byte[receiver.mss + Message.HEAD_LENGTH], receiver.mss + Message.HEAD_LENGTH);
                 socket.receive(request);
 
                 //验证
                 Message recMessage = Message.deMessage(request.getData());
-                if (!recMessage.isAck() || recMessage.getRank() != r.getRcvdSequence()) {
+                if (!recMessage.isAck() || recMessage.getRank() != receiver.getRcvdSequence()) {
                     logger.error("上述报文非第三次握手报文");
                     continue;
                 }
 
                 //更新信息
-                r.setSequence(r.getSequence() + 1);
-                r.setRcvdSequence(recMessage.getRank() + recMessage.getContentLength());
-                r.changeState(ReceiverState.ESTABLISHED);
+                receiver.setSequence(receiver.getSequence() + 1);
+                receiver.setRcvdSequence(recMessage.getRank() + recMessage.getContentLength());
+                receiver.changeState(ReceiverState.ESTABLISHED);
 
                 socket.send(new DatagramPacket(new byte[0], 0, request.getAddress(), request.getPort()));
                 break;
