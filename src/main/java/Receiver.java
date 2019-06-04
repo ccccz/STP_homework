@@ -63,9 +63,9 @@ public class Receiver extends Thread{
     /**
      * 将要发送给Sender的acknolegment
      */
-    private int toSendAcknolegment=0;
+    private int toSendAcknowlegment =0;
     private int lastSendSequence = 0;
-    private int lastSendAcknolegment = 0;
+    private int lastSendAcknowlegment = 0;
 
     private SocketAddress des_address;
 
@@ -243,7 +243,7 @@ public class Receiver extends Thread{
     private void setACKMessage() {
         toSendMessage = new Message();
         toSendMessage.setACK(true);
-        toSendMessage.setAcknolegment(toSendAcknolegment);
+        toSendMessage.setAcknolegment(toSendAcknowlegment);
 //        toSendMessage.setSequence(toSendSequence);
     }
 
@@ -251,7 +251,7 @@ public class Receiver extends Thread{
         toSendMessage = new Message();
         toSendMessage.setSYN(true);
         toSendMessage.setACK(true);
-        toSendMessage.setAcknolegment(toSendAcknolegment);
+        toSendMessage.setAcknolegment(toSendAcknowlegment);
         toSendMessage.setSequence(toSendSequence);
     }
 
@@ -303,7 +303,7 @@ public class Receiver extends Thread{
                 logger.debug("Receiver: receive SYN.");
                 changeState(ReceiverState.SYN_RECEIVED);
                 // TODO: 2019-06-03 发送SYN ACK
-                toSendAcknolegment = receivedMessage.getSequence()+1;
+                toSendAcknowlegment = receivedMessage.getSequence()+1;
                 setSYNACKMessage();
                 toSendPacket = toSendMessage.enMessage();
 
@@ -316,9 +316,9 @@ public class Receiver extends Thread{
                     e.printStackTrace();
                 }
                 lastSendSequence = toSendSequence;
-                lastSendAcknolegment = toSendAcknolegment;
+                lastSendAcknowlegment = toSendAcknowlegment;
 
-            } else if (receivedMessage.isACK() && receiverState == ReceiverState.SYN_RECEIVED && receivedMessage.getSequence() == lastSendAcknolegment && receivedMessage.getAcknolegment() == lastSendSequence + 1) {  // 收到ACK
+            } else if (receivedMessage.isACK() && receiverState == ReceiverState.SYN_RECEIVED && receivedMessage.getSequence() == lastSendAcknowlegment && receivedMessage.getAcknolegment() == lastSendSequence + 1) {  // 收到ACK
                 logger.debug("Receiver: receive ACK.");
                 changeState(ReceiverState.ESTABLISHED);
                 // TODO: 2019-06-03 好像除了改变状态并不需要做什么
@@ -342,13 +342,13 @@ public class Receiver extends Thread{
                 window.put(receivedMessage.getSequence(), receivedMessage.getContent());
 
                 // 将要发送给Sender的acknolegment，暂时先定为已经写入文件的字节数
-                toSendAcknolegment = byteHasWrite;
+                toSendAcknowlegment = byteHasWrite;
 
                 // 采用累积确认，这里来计算正确的将要发送给Sender的acknoledgment
-                while (window.containsKey(toSendAcknolegment)) {
+                while (window.containsKey(toSendAcknowlegment)) {
                     // 如果在接收窗口中，没有Receiver期望接收到的sequence，就不必更改toSendAcknolegment
                     // 如果在接收窗口中，已经有了Receiver期望接收到的sequence，就更改toSendAcknolegment，增加该包中数据的长度到toSendAcknolegment中
-                    toSendAcknolegment += window.get(toSendAcknolegment).length;
+                    toSendAcknowlegment += window.get(toSendAcknowlegment).length;
                 }
 
                 setACKMessage();
