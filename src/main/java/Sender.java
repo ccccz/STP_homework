@@ -26,7 +26,6 @@ public class Sender {
 
 	@NonNull
 	private String filePath;  //文件路径
-	private int fileLength;  // 文件所含有的字节数
 	@NonNull
 	private String disIP;   //接收方程序的IP地址
 	private final int disPort;    //接收方程序的端口
@@ -40,6 +39,7 @@ public class Sender {
 	@NonNull
 	private int initalTimeout;     //初始的超时
 
+	private int fileLength;  // 文件所含有的字节数
 	private SenderState senderState = SenderState.CLOSED;
 	/**
 	 * 目前已经发送成功的字节的数量，不包含本数据包
@@ -507,9 +507,11 @@ public class Sender {
 				} else if (receivedMessage.isACK() && senderState == SenderState.ESTABLISHED) {
 					// 如果Sender接收到的packet是ACK packet
 					// 如果收到的来自Receiver的acknolegment比Sender所记录的已经确认收到的ACK字节号大，说明Sender发送的数据都已经收到了
-					logger.debug("Sender: receive ACK.");
+					logger.debug("Sender: receive ACK. byteHasAcked:{}, receivedMessage.getAcknolegment():{}",
+							byteHasAcked,receivedMessage.getAcknolegment());
 					if (byteHasAcked < receivedMessage.getAcknolegment()) {
 						byteHasAcked = receivedMessage.getAcknolegment();  // 更新已经确认的ACK号
+						logger.debug("update byteHasAcked:{}",byteHasAcked);
 						// 移动滑动窗口的左侧
 						left = receivedMessage.getAcknolegment();
 						duplicateACK = 1;
@@ -538,6 +540,11 @@ public class Sender {
 					logger.debug("Sender: receive FIN.");
 					changeState(SenderState.CLOSED);
 					datagramSocket.close();
+					try {
+						bufferedInputStream.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					System.exit(0);
 				}
 			}
@@ -614,7 +621,7 @@ public class Sender {
 
 			while (senderState == SenderState.ESTABLISHED) {
 				// 将byteHasSent-right段的数据全部发送出去
-				while (byteHasAcked < fileLength) {
+				while (byteHasAcked <= fileLength) {
 					while (byteHasSent < right) {
 						sendMessageBySequence(byteHasSent);
 						logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);

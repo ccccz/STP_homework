@@ -20,9 +20,9 @@ import java.util.HashMap;
 @Data
 public class Receiver extends Thread{
     @NonNull
-    private String ip;
-    @NonNull
     private String filePath;
+    @NonNull
+    private String ip;
     private final int port;
     private final double pDrop;
     private final int seedDrop;
@@ -231,6 +231,7 @@ public class Receiver extends Thread{
     public void writeIntoFile(byte[] data) {
         try {
             fileOutputStream.write(data);
+            logger.debug("write into file:{}",data);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -241,6 +242,7 @@ public class Receiver extends Thread{
      */
     private void setACKMessage() {
         toSendMessage = new Message();
+        toSendMessage.setACK(true);
         toSendMessage.setAcknolegment(toSendAcknolegment);
 //        toSendMessage.setSequence(toSendSequence);
     }
@@ -261,6 +263,7 @@ public class Receiver extends Thread{
 
         // 创建文件，用于存放从Sender接收到的数据
         File file = new File(filePath);
+        logger.debug("create file to save data:{}",file.getPath());
         if (file.exists()) {
             file.delete();
         }
@@ -290,7 +293,7 @@ public class Receiver extends Thread{
 
             des_address = inDatagramPacket.getSocketAddress();
             receiveBuffer = inDatagramPacket.getData();
-            logger.debug("receiveBuffer: {}",receiveBuffer);
+//            logger.debug("receiveBuffer: {}",receiveBuffer);
             receivedMessage = Message.deMessage(receiveBuffer);
 
             logger.info("Receiver: receiverState--{}",receiverState);
@@ -329,6 +332,7 @@ public class Receiver extends Thread{
                     datagramSocket.send(outDatagramPacket);  // 将FIN packet发送回Sender
                     logger.debug("Receiver: send FIN back.");
                     datagramSocket.close();
+                    fileOutputStream.close();
                     break;
                 } catch (IOException e) {
                     e.printStackTrace();
