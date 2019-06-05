@@ -465,7 +465,10 @@ public class Sender {
 			toSendMessage.setSYN(true);
 			toSendMessage.setSequence(seqNum);  // 这个随便取
 			toSendMessage.setAcknolegment(0);
-
+			toSendMessage.setContent(toSendData);
+			byte[] toSendCRC = CRC16.generateCRC(toSendData);
+			toSendMessage.setCrc16(toSendCRC);
+			toSendMessage.setTime((new Date()).getTime());
 		}
 
 		/**
@@ -480,6 +483,10 @@ public class Sender {
 			toSendMessage.setSYN(false);
 			toSendMessage.setSequence(toSendSequence);
 			toSendMessage.setAcknolegment(toSendAcknolegment);
+			toSendMessage.setContent(toSendData);
+			byte[] toSendCRC = CRC16.generateCRC(toSendData);
+			toSendMessage.setCrc16(toSendCRC);
+			toSendMessage.setTime((new Date()).getTime());
 		}
 	}
 
@@ -615,6 +622,11 @@ public class Sender {
 		private void setFINMessage() {
 			toSendMessage = new Message();
 			toSendMessage.setFIN(true);
+			toSendMessage.setSequence(toSendSequence);
+			toSendMessage.setContent(toSendData);
+			byte[] toSendCRC = CRC16.generateCRC(toSendData);
+			toSendMessage.setCrc16(toSendCRC);
+			toSendMessage.setTime((new Date()).getTime());
 		}
 
 		@Override
