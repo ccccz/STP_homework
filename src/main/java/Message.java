@@ -182,6 +182,7 @@ public class Message {
     void setContent(byte[] content) {
         this.contentLength = (short) content.length;
         this.content = content;
+        this.crc16 = CRC16.generateCRC(content);
     }
 
     //TODO yh 检查过时消息
