@@ -601,9 +601,7 @@ public class Sender {
 			toSendMessage.setFIN(false);
 			toSendMessage.setRST(false);
 			toSendMessage.setSequence(toSendSequence);
-			toSendMessage.setContent(toSendData);
-			byte[] toSendCRC = CRC16.generateCRC(toSendData);  // todo：不应在这里获取校验
-			toSendMessage.setCrc16(toSendCRC);
+			toSendMessage.setContent(toSendData);//setCRC含在其中了
 			toSendMessage.setTime((new Date()).getTime());
 		}
 

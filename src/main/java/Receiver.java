@@ -11,6 +11,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketAddress;
 import java.net.SocketException;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -238,9 +239,9 @@ public class Receiver{
         toSendMessage = new Message();
         toSendMessage.setACK(true);
         toSendMessage.setAcknolegment(toSendAcknowlegment);
-//        toSendMessage.setSequence(toSendSequence);
-        toSendMessage.setCrc16(new byte[]{1,1});
-//        toSendMessage.setContent(new byte[]{});
+        toSendMessage.setSequence(toSendSequence);
+        toSendMessage.setContent(new byte[]{});
+        toSendMessage.setTime((new Date()).getTime());
     }
 
     private void setSYNACKMessage() {
@@ -249,8 +250,8 @@ public class Receiver{
         toSendMessage.setACK(true);
         toSendMessage.setAcknolegment(toSendAcknowlegment);
         toSendMessage.setSequence(toSendSequence);
-        toSendMessage.setCrc16(new byte[]{1,1});
-//        toSendMessage.setContent(new byte[]{});
+        toSendMessage.setContent(new byte[]{});
+        toSendMessage.setTime((new Date()).getTime());
     }
 
     public void receiveMessage() {
