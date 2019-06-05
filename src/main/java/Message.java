@@ -1,9 +1,8 @@
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import java.util.zip.CRC32;
 import java.util.Arrays;
-
 /**
  * @author DW
  * @date 2019/5/22
@@ -13,7 +12,8 @@ import java.util.Arrays;
 public class Message {
     private static final Logger logger = LoggerFactory.getLogger(Sender.class);
 
-    public static final int HEAD_LENGTH = 27;
+    public static final int CRC_LENGTH = 2;
+    public static final int HEAD_LENGTH = 29;
     private static final int CLEAN = 0xff;
     /**
      * 源端口号
@@ -61,6 +61,11 @@ public class Message {
      * 本包装载的数据
      */
     private byte[] content;
+
+    /**
+     * 本包数据的校验码
+     */
+    private byte[] crc16;
 
     /**
      * 将Message对象实例转换为byte[]数组
@@ -122,6 +127,9 @@ public class Message {
         head[25] = (byte) ((contentLength & CLEAN) >>> 8);
         head[26] = (byte) (contentLength & 0x00ff);
 
+        //add CRC to head
+        System.arraycopy(this.crc16, 0, head, HEAD_LENGTH-CRC_LENGTH, CRC_LENGTH);
+
         // 如果该Message中的content字段为空
         if (this.content==null||this.content.length==0||this.contentLength==0) {
             return head;
@@ -155,10 +163,14 @@ public class Message {
                 | ((long) (message[20] & CLEAN) << 32) | ((long) (message[21] & CLEAN) << 24) | ((long) (message[22] & CLEAN) << 16) | ((long) (message[23] & CLEAN) << 8) | ((long) message[24] & CLEAN));
         m.setContentLength((short) (((message[25] & CLEAN) << 8) | message[26] & CLEAN));
 
+        byte[] crc = new byte[CRC_LENGTH];
+        System.arraycopy(message, 27, crc, 0, CRC_LENGTH);
+        m.setCrc16(crc);
+
         // TODO: 2019-06-03 如果收到的packet中data字段为空呢？
-        byte[] c = new byte[m.getContentLength()];
-        System.arraycopy(message, HEAD_LENGTH, c, 0, m.getContentLength());
-        m.setContent(c);
+        byte[] con = new byte[m.getContentLength()];
+        System.arraycopy(message, HEAD_LENGTH, con, 0, m.getContentLength());
+        m.setContent(con);
 
         // TODO: 2019-06-04 这里的方法有问题：获取dataContent好像不太对
         logger.debug("接收到报文，数据内容长度:{},报文序号{},报文确认号{},SYN:{},ACK:{},FIN:{}", m.contentLength, m.getSequence(),
@@ -174,6 +186,14 @@ public class Message {
     //TODO yh 检查过时消息
     //TODO hl 可能需要新增一个参数确定是哪个分块
 
+
+    public void setCrc16(byte[] crc16) {
+        this.crc16 = crc16;
+    }
+
+    public byte[] getCrc16(){
+        return this.crc16;
+    }
 
     public void setSrcPort(int srcPort) {
         this.srcPort = srcPort;
@@ -290,4 +310,16 @@ public class Message {
     public boolean isSYNACK() {
         return SYN && ACK;
     }
+
+
+//    public static byte[] hexStringToByteArray(String s) {
+//        int len = s.length();
+//        byte[] data = new byte[len / 2];
+//        for (int i = 0; i < len; i += 2) {
+//            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+//                                 + Character.digit(s.charAt(i+1), 16));
+//        }
+//        return data;
+//    }
+
 }
