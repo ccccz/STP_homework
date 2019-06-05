@@ -2,12 +2,34 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b6acc66-1403-4b56-8893-623db2327f73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_27_1_jre.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_2_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_17_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_26.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Receiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Receiver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReceiverState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ReceiverState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SenderState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SenderState.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,19 +40,14 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.44362745">
+    <splitter split-orientation="horizontal" split-proportion="0.50692964">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/pom.xml">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1645">
-                  <caret line="318" column="52" selection-start-line="318" selection-start-column="52" selection-end-line="318" selection-end-column="52" />
+                <state relative-caret-position="-12">
+                  <caret line="405" column="41" lean-forward="true" selection-start-line="405" selection-start-column="41" selection-end-line="405" selection-end-column="41" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="docComment;class#Receiver#0" />
@@ -39,133 +56,20 @@
                     <element signature="e#1444#1473#0" />
                     <element signature="e#1510#1549#0" />
                     <element signature="e#1588#1631#0" />
-                    <element signature="e#1792#1801#0" />
-                    <element signature="e#3251#3277#0" />
-                    <element signature="e#3251#3401#0" />
-                    <element signature="e#3403#3412#0" />
-                    <element signature="e#6567#7349#0" />
-                    <element signature="e#6638#6719#1" />
-                    <element signature="e#6721#6808#0" />
-                    <element signature="e#7388#7469#0" />
-                    <element signature="e#7388#7706#0" />
-                    <element signature="e#7527#7633#0" />
-                    <element signature="e#7656#7700#0" />
-                    <element signature="e#7712#7796#0" />
-                    <element signature="e#7712#8024#0" />
-                    <element signature="e#8030#8290#0" />
-                    <element signature="e#8585#8623#1" />
-                    <element signature="e#8637#8713#0" />
-                    <element signature="e#8746#8790#0" />
-                    <element signature="e#8804#8870#0" />
-                    <element signature="e#8897#8941#0" />
-                    <element signature="e#9129#9202#0" />
-                    <element signature="e#9225#9277#0" />
-                    <element signature="e#10082#10330#0" />
-                    <element signature="e#10353#10413#0" />
-                    <element signature="e#10738#10927#1" />
-                    <element signature="e#10962#11710#1" />
-                    <element signature="e#10998#11613#0" />
-                    <element signature="e#11636#11696#0" />
-                    <element signature="e#11764#13229#1" />
-                    <element signature="e#12175#12468#1" />
-                    <element signature="e#12197#12257#0" />
-                    <element signature="e#12613#12800#0" />
-                    <element signature="e#12823#12883#0" />
-                    <element signature="e#12976#13215#1" />
+                    <element signature="e#9460#9487#0" />
+                    <element signature="e#10944#11514#0" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1919">
-                  <caret line="413" column="59" lean-forward="true" selection-start-line="413" selection-start-column="59" selection-end-line="413" selection-end-column="59" />
+                <state relative-caret-position="126">
+                  <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
                   <folding>
-                    <element signature="docComment;class#Sender#0" />
-                    <element signature="e#1105#1140#0" />
-                    <element signature="e#1168#1207#0" />
-                    <element signature="e#1236#1271#0" />
-                    <element signature="e#1310#1330#0" />
-                    <element signature="e#1351#1371#0" />
-                    <element signature="e#1563#1572#0" />
-                    <element signature="e#1714#1735#0" />
-                    <element signature="e#1766#1787#0" />
-                    <element signature="e#2292#3184#0" />
-                    <element signature="e#2367#2424#1" />
-                    <element signature="e#2856#2904#0" />
-                    <element signature="e#3187#3881#0" />
-                    <element signature="e#3672#3719#0" />
-                    <element signature="e#3746#3775#0" />
-                    <element signature="e#3883#3889#0" />
-                    <element signature="e#4736#5120#0" />
-                    <element signature="e#4812#5117#1" />
-                    <element signature="e#4885#5059#0" />
-                    <element signature="e#5082#5113#0" />
-                    <element signature="e#5123#5465#0" />
-                    <element signature="e#5259#5409#0" />
-                    <element signature="e#5432#5461#0" />
-                    <element signature="e#5468#5488#0" />
-                    <element signature="e#5468#5590#0" />
-                    <element signature="e#5593#5628#0" />
-                    <element signature="e#5593#5817#0" />
-                    <element signature="e#5820#5918#0" />
-                    <element signature="e#5919#5971#0" />
-                    <element signature="e#9213#9238#0" />
-                    <element signature="e#9213#9426#0" />
-                    <element signature="e#9429#9467#0" />
-                    <element signature="e#9429#9643#0" />
-                    <element signature="e#9646#9735#0" />
-                    <element signature="e#10592#10615#0" />
-                    <element signature="e#10616#10662#0" />
-                    <element signature="e#12042#12082#0" />
-                    <element signature="e#12482#12529#1" />
-                    <element signature="e#12595#12627#0" />
-                    <element signature="e#12659#12692#0" />
-                    <element signature="e#12766#12788#1" />
-                    <element signature="e#12860#12882#1" />
-                    <element signature="e#13201#13233#0" />
-                    <element signature="e#13265#13298#0" />
-                    <element signature="e#13390#13465#0" />
-                    <element signature="e#13390#13694#0" />
-                    <element signature="e#13698#13777#0" />
-                    <element signature="e#13698#14011#0" />
-                    <element signature="e#14017#14034#0" />
-                    <element signature="e#14017#16275#0" />
-                    <element signature="e#14068#16272#0" />
-                    <element signature="e#14194#16268#1" />
-                    <element signature="e#14489#14586#1" />
-                    <element signature="e#14663#15380#1" />
-                    <element signature="e#14670#14702#0" />
-                    <element signature="e#14996#15374#1" />
-                    <element signature="e#15275#15311#1" />
-                    <element signature="e#15317#15367#1" />
-                    <element signature="e#15441#15979#1" />
-                    <element signature="e#15631#15973#1" />
-                    <element signature="e#15654#15829#0" />
-                    <element signature="e#15836#15855#0" />
-                    <element signature="e#16014#16263#1" />
-                    <element signature="e#16135#16178#0" />
-                    <element signature="e#16201#16236#0" />
-                    <element signature="e#16278#16339#0" />
-                    <element signature="e#16278#18825#0" />
-                    <element signature="e#16437#16940#0" />
-                    <element signature="e#16457#16718#0" />
-                    <element signature="e#16741#16772#0" />
-                    <element signature="e#16944#17228#0" />
-                    <element signature="e#17232#17861#0" />
-                    <element signature="e#17290#17803#0" />
-                    <element signature="e#17826#17857#0" />
-                    <element signature="e#17865#18074#0" />
-                    <element signature="e#18078#18177#0" />
-                    <element signature="e#18181#18822#0" />
-                    <element signature="e#18300#18818#1" />
-                    <element signature="e#18377#18813#1" />
-                    <element signature="e#18412#18535#1" />
-                    <element signature="e#18585#18685#1" />
-                    <element signature="e#18755#18807#1" />
-                    <element signature="class#SenderState#0" />
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -175,14 +79,52 @@
       </split-first>
       <split-second>
         <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="340">
+                  <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="docComment;class#Receiver#0" />
+                    <element signature="e#903#933#0" />
+                    <element signature="e#972#994#0" />
+                    <element signature="e#1444#1473#0" />
+                    <element signature="e#1510#1549#0" />
+                    <element signature="e#1588#1631#0" />
+                    <element signature="e#1795#1804#0" />
+                    <element signature="e#3406#3415#0" />
+                    <element signature="e#6724#6811#0" />
+                    <element signature="e#7391#7709#0" />
+                    <element signature="e#7530#7636#0" />
+                    <element signature="e#8590#8628#1" />
+                    <element signature="e#8642#8718#0" />
+                    <element signature="e#8751#8795#0" />
+                    <element signature="e#8809#8875#0" />
+                    <element signature="e#8902#8946#0" />
+                    <element signature="e#9460#9487#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/README.md">
-              <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-                <state split_layout="FIRST">
-                  <first_editor relative-caret-position="703">
-                    <caret line="37" column="49" lean-forward="true" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
-                  </first_editor>
-                  <second_editor />
+            <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="72">
+                  <caret line="694" selection-start-line="694" selection-end-line="694" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="docComment;class#Sender#0" />
+                    <element signature="e#3827#3833#0" />
+                    <element signature="e#5863#5915#0" />
+                    <element signature="e#9590#9679#0" />
+                    <element signature="e#10560#10606#0" />
+                    <element signature="e#18841#18986#0" expanded="true" />
+                    <element signature="e#18985#18986#0" expanded="true" />
+                    <element signature="e#18592#18919#0" />
+                    <element signature="class#SenderState#0" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -191,58 +133,40 @@
       </split-second>
     </splitter>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>参数数量不足，请重新启动程序</find>
+      <find>changeState(SenderState.ESTABLISHED)</find>
+      <find>new Message</find>
+      <find>setData</find>
+      <find>drop</find>
+      <find>getDrop</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/file.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="260" />
-    <option name="y" value="20" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator currentView="PackagesPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="test" type="58d84e3e:PackageViewProjectNode" />
-              <item name="test" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="test" type="58d84e3e:PackageViewProjectNode" />
-              <item name="test" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="test" type="58d84e3e:PackageViewProjectNode" />
-              <item name="test" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="test" type="58d84e3e:PackageViewProjectNode" />
-              <item name="test" type="616d4139:PackageViewModuleNode" />
-              <item name="main" type="1f31426a:PackageElementNode" />
-              <item name="java" type="1f31426a:PackageElementNode" />
-              <item name="Sender.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -254,6 +178,18 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="test" type="58d84e3e:PackageViewProjectNode" />
+              <item name="test" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -263,7 +199,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -276,6 +212,34 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Application.Sender">
+    <configuration name="Receiver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Receiver" />
+      <module name="test" />
+      <option name="PROGRAM_PARAMETERS" value="receive.txt 127.0.0.1 8080 0.7 100 2000 0.7 200" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Sender" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Sender" />
+      <module name="test" />
+      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 8080 0.4 100 2000 0.4 100 8 32 2000" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Receiver" />
+      <item itemvalue="Application.Sender" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Sender" />
+        <item itemvalue="Application.Receiver" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -292,26 +256,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13006397" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.20202559" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.329718" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.77982646" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.6767896" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -321,15 +284,126 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.202407" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31325302" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3383948" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329718" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+    </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Sender.java</url>
+          <line>679</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression=".getString(R.string.)" language="JAVA" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>.getString(R.string.)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>right</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>left</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/System.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="493" column="48" selection-start-line="493" selection-start-column="48" selection-end-line="493" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/receive.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="255" selection-start-column="255" selection-end-column="255" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1645">
-          <caret line="318" column="52" selection-start-line="318" selection-start-column="52" selection-end-line="318" selection-end-column="52" />
+        <state relative-caret-position="340">
+          <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#Receiver#0" />
@@ -338,148 +412,35 @@
             <element signature="e#1444#1473#0" />
             <element signature="e#1510#1549#0" />
             <element signature="e#1588#1631#0" />
-            <element signature="e#1792#1801#0" />
-            <element signature="e#3251#3277#0" />
-            <element signature="e#3251#3401#0" />
-            <element signature="e#3403#3412#0" />
-            <element signature="e#6567#7349#0" />
-            <element signature="e#6638#6719#1" />
-            <element signature="e#6721#6808#0" />
-            <element signature="e#7388#7469#0" />
-            <element signature="e#7388#7706#0" />
-            <element signature="e#7527#7633#0" />
-            <element signature="e#7656#7700#0" />
-            <element signature="e#7712#7796#0" />
-            <element signature="e#7712#8024#0" />
-            <element signature="e#8030#8290#0" />
-            <element signature="e#8585#8623#1" />
-            <element signature="e#8637#8713#0" />
-            <element signature="e#8746#8790#0" />
-            <element signature="e#8804#8870#0" />
-            <element signature="e#8897#8941#0" />
-            <element signature="e#9129#9202#0" />
-            <element signature="e#9225#9277#0" />
-            <element signature="e#10082#10330#0" />
-            <element signature="e#10353#10413#0" />
-            <element signature="e#10738#10927#1" />
-            <element signature="e#10962#11710#1" />
-            <element signature="e#10998#11613#0" />
-            <element signature="e#11636#11696#0" />
-            <element signature="e#11764#13229#1" />
-            <element signature="e#12175#12468#1" />
-            <element signature="e#12197#12257#0" />
-            <element signature="e#12613#12800#0" />
-            <element signature="e#12823#12883#0" />
-            <element signature="e#12976#13215#1" />
+            <element signature="e#1795#1804#0" />
+            <element signature="e#3406#3415#0" />
+            <element signature="e#6724#6811#0" />
+            <element signature="e#7391#7709#0" />
+            <element signature="e#7530#7636#0" />
+            <element signature="e#8590#8628#1" />
+            <element signature="e#8642#8718#0" />
+            <element signature="e#8751#8795#0" />
+            <element signature="e#8809#8875#0" />
+            <element signature="e#8902#8946#0" />
+            <element signature="e#9460#9487#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="703">
-            <caret line="37" column="49" lean-forward="true" selection-start-line="37" selection-start-column="49" selection-end-line="37" selection-end-column="49" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1919">
-          <caret line="413" column="59" lean-forward="true" selection-start-line="413" selection-start-column="59" selection-end-line="413" selection-end-column="59" />
+        <state relative-caret-position="72">
+          <caret line="694" selection-start-line="694" selection-end-line="694" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Sender#0" />
-            <element signature="e#1105#1140#0" />
-            <element signature="e#1168#1207#0" />
-            <element signature="e#1236#1271#0" />
-            <element signature="e#1310#1330#0" />
-            <element signature="e#1351#1371#0" />
-            <element signature="e#1563#1572#0" />
-            <element signature="e#1714#1735#0" />
-            <element signature="e#1766#1787#0" />
-            <element signature="e#2292#3184#0" />
-            <element signature="e#2367#2424#1" />
-            <element signature="e#2856#2904#0" />
-            <element signature="e#3187#3881#0" />
-            <element signature="e#3672#3719#0" />
-            <element signature="e#3746#3775#0" />
-            <element signature="e#3883#3889#0" />
-            <element signature="e#4736#5120#0" />
-            <element signature="e#4812#5117#1" />
-            <element signature="e#4885#5059#0" />
-            <element signature="e#5082#5113#0" />
-            <element signature="e#5123#5465#0" />
-            <element signature="e#5259#5409#0" />
-            <element signature="e#5432#5461#0" />
-            <element signature="e#5468#5488#0" />
-            <element signature="e#5468#5590#0" />
-            <element signature="e#5593#5628#0" />
-            <element signature="e#5593#5817#0" />
-            <element signature="e#5820#5918#0" />
-            <element signature="e#5919#5971#0" />
-            <element signature="e#9213#9238#0" />
-            <element signature="e#9213#9426#0" />
-            <element signature="e#9429#9467#0" />
-            <element signature="e#9429#9643#0" />
-            <element signature="e#9646#9735#0" />
-            <element signature="e#10592#10615#0" />
-            <element signature="e#10616#10662#0" />
-            <element signature="e#12042#12082#0" />
-            <element signature="e#12482#12529#1" />
-            <element signature="e#12595#12627#0" />
-            <element signature="e#12659#12692#0" />
-            <element signature="e#12766#12788#1" />
-            <element signature="e#12860#12882#1" />
-            <element signature="e#13201#13233#0" />
-            <element signature="e#13265#13298#0" />
-            <element signature="e#13390#13465#0" />
-            <element signature="e#13390#13694#0" />
-            <element signature="e#13698#13777#0" />
-            <element signature="e#13698#14011#0" />
-            <element signature="e#14017#14034#0" />
-            <element signature="e#14017#16275#0" />
-            <element signature="e#14068#16272#0" />
-            <element signature="e#14194#16268#1" />
-            <element signature="e#14489#14586#1" />
-            <element signature="e#14663#15380#1" />
-            <element signature="e#14670#14702#0" />
-            <element signature="e#14996#15374#1" />
-            <element signature="e#15275#15311#1" />
-            <element signature="e#15317#15367#1" />
-            <element signature="e#15441#15979#1" />
-            <element signature="e#15631#15973#1" />
-            <element signature="e#15654#15829#0" />
-            <element signature="e#15836#15855#0" />
-            <element signature="e#16014#16263#1" />
-            <element signature="e#16135#16178#0" />
-            <element signature="e#16201#16236#0" />
-            <element signature="e#16278#16339#0" />
-            <element signature="e#16278#18825#0" />
-            <element signature="e#16437#16940#0" />
-            <element signature="e#16457#16718#0" />
-            <element signature="e#16741#16772#0" />
-            <element signature="e#16944#17228#0" />
-            <element signature="e#17232#17861#0" />
-            <element signature="e#17290#17803#0" />
-            <element signature="e#17826#17857#0" />
-            <element signature="e#17865#18074#0" />
-            <element signature="e#18078#18177#0" />
-            <element signature="e#18181#18822#0" />
-            <element signature="e#18300#18818#1" />
-            <element signature="e#18377#18813#1" />
-            <element signature="e#18412#18535#1" />
-            <element signature="e#18585#18685#1" />
-            <element signature="e#18755#18807#1" />
+            <element signature="e#3827#3833#0" />
+            <element signature="e#5863#5915#0" />
+            <element signature="e#9590#9679#0" />
+            <element signature="e#10560#10606#0" />
+            <element signature="e#18841#18986#0" expanded="true" />
+            <element signature="e#18985#18986#0" expanded="true" />
+            <element signature="e#18592#18919#0" />
             <element signature="class#SenderState#0" />
           </folding>
         </state>

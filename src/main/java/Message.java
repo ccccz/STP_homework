@@ -52,7 +52,7 @@ public class Message {
      * 数据最大长度字节: 1500 - 20(IP) - 8 (UDP) = 1472  short:32768‬
      */
     private short mss;
-    private long time;
+    private long time;  // todo:发送时间，发送前设置，isDelay前
     /**
      * 本包装载的数据长度
      */
@@ -128,6 +128,7 @@ public class Message {
         head[26] = (byte) (contentLength & 0x00ff);
 
         //add CRC to head
+//        logger.debug("{},{},{}",crc16.length,HEAD_LENGTH-CRC_LENGTH,CRC_LENGTH);
         System.arraycopy(this.crc16, 0, head, HEAD_LENGTH-CRC_LENGTH, CRC_LENGTH);
 
         // 如果该Message中的content字段为空
