@@ -9,9 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.*;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Math.max;
 
@@ -109,8 +107,8 @@ public class Sender {
 				Double.parseDouble(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]),
 				Double.parseDouble(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8]),
 				Integer.parseInt(args[9]), Integer.parseInt(args[10]));
-		sender.setRandomDelay(new Random((long) sender.seedDelay));
-		sender.setRandomDrop(new Random((long) sender.seedDrop));
+		// sender.setRandomDelay(new Random((long) sender.seedDelay));
+		// sender.setRandomDrop(new Random((long) sender.seedDrop));
 //		sender.window = new ArrayList<>(sender.mws);
 //		ThreadFactory f = new ThreadFactoryBuilder().setNameFormat("发送数据包-%d").build();
 //		sender.toSend = new ThreadPoolExecutor(sender.mws, sender.mws + 2, sender.getInitalTimeout(), TimeUnit.MILLISECONDS,
@@ -467,6 +465,7 @@ public class Sender {
 			toSendMessage.setSYN(true);
 			toSendMessage.setSequence(seqNum);  // 这个随便取
 			toSendMessage.setAcknolegment(0);
+
 		}
 
 		/**
@@ -581,6 +580,9 @@ public class Sender {
 			toSendMessage.setRST(false);
 			toSendMessage.setSequence(toSendSequence);
 			toSendMessage.setContent(toSendData);
+			byte[] toSendCRC = CRC16.generateCRC(toSendData);
+			toSendMessage.setCrc16(toSendCRC);
+			toSendMessage.setTime((new Date()).getTime());
 		}
 
 		private void sendMessageBySequence(int sequence) {
