@@ -18,7 +18,7 @@ import java.util.HashMap;
  * @date 2019/5/22
  */
 @Data
-public class Receiver extends Thread{
+public class Receiver{
     @NonNull
     private String filePath;
     @NonNull
@@ -68,7 +68,6 @@ public class Receiver extends Thread{
     private int lastSendAcknolegment = 0;
 
     private SocketAddress des_address;
-
 
 //    /**
 //     *
@@ -211,17 +210,12 @@ public class Receiver extends Thread{
 //
 //        establishConnection(receiver);
 
-        Thread receiver = new Receiver(args[0], args[1], Integer.parseInt(args[2]),
+        Receiver receiver = new Receiver(args[0], args[1], Integer.parseInt(args[2]),
                 Double.parseDouble(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]),
                 Double.parseDouble(args[6]), Integer.parseInt(args[7]));
-        receiver.start();
-
-
-        //TODO 对非建立连接的消息进行过滤
-
+        receiver.run();
+        receiver.accept();
     }
-
-    //TODO: sn 将获取到的二进制字节流转化为文档
 
     /**
      * 将字节数写入文件输出流fileOutputStream中
@@ -236,7 +230,6 @@ public class Receiver extends Thread{
             e.printStackTrace();
         }
     }
-
     /**
      * 在数据传送阶段，当Receiver收到来自Sender的data packet后，构造要发送回Sender的ACK Message
      */
@@ -255,7 +248,9 @@ public class Receiver extends Thread{
         toSendMessage.setSequence(toSendSequence);
     }
 
-    @Override
+    /**
+     * 建立连接阶段
+     */
     public void run() {
         logger.debug("Receiver run()!");
 
@@ -285,19 +280,6 @@ public class Receiver extends Thread{
 
         // Receiver不停地接收Sender发送的数据
         while (true) {
-            try {
-                datagramSocket.receive(inDatagramPacket);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            des_address = inDatagramPacket.getSocketAddress();
-            receiveBuffer = inDatagramPacket.getData();
-//            logger.debug("receiveBuffer: {}",receiveBuffer);
-            receivedMessage = Message.deMessage(receiveBuffer);
-
-            logger.info("Receiver: receiverState--{}",receiverState);
-
             // 收到SYN
             if (receivedMessage.isSYN() && receiverState == ReceiverState.LISTEN) {
                 logger.debug("Receiver: receive SYN.");
@@ -321,10 +303,32 @@ public class Receiver extends Thread{
             } else if (receivedMessage.isACK() && receiverState == ReceiverState.SYN_RECEIVED && receivedMessage.getSequence() == lastSendAcknolegment && receivedMessage.getAcknolegment() == lastSendSequence + 1) {  // 收到ACK
                 logger.debug("Receiver: receive ACK.");
                 changeState(ReceiverState.ESTABLISHED);
-                // TODO: 2019-06-03 好像除了改变状态并不需要做什么
-            } else if (receivedMessage.isFIN()) {  // 如果是连接终止请求
+            }
+        }
+
+        // Receiver不停地等待接收
+    }
+
+    /**
+     * 连接建立成功后，开始接收来自Sender的数据，并写入文件
+     */
+    public void accept() {
+        while (true) {
+            // 不停地接收来自Sender的数据
+            try {
+                datagramSocket.receive(inDatagramPacket);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            des_address = inDatagramPacket.getSocketAddress();
+            receiveBuffer = inDatagramPacket.getData();
+            receivedMessage = Message.deMessage(receiveBuffer);
+
+            logger.info("Receiver: receiverState--{}",receiverState);
+
+            if (receivedMessage.isFIN()) {  // 如果是连接终止请求
                 try {
-                    // TODO: 2019-06-03 终止连接
                     logger.debug("Receiver: receive FIN.");
                     changeState(ReceiverState.CLOSED);
                     toSendPacket = receivedMessage.enMessage();
@@ -361,6 +365,7 @@ public class Receiver extends Thread{
                     e.printStackTrace();
                 }
                 // 将按顺序到达的data写入文件
+                // TODO: 2019-06-05 文件写入线程
                 while (window.containsKey(byteHasWrite)) {
                     int length = window.get(byteHasWrite).length;
                     writeIntoFile(window.get(byteHasWrite));
