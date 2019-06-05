@@ -52,7 +52,7 @@ public class Message {
      * 数据最大长度字节: 1500 - 20(IP) - 8 (UDP) = 1472  short:32768‬
      */
     private short mss;
-    private long time;
+    private long time;  // todo:发送时间，发送前设置，isDelay前
     /**
      * 本包装载的数据长度
      */
@@ -72,7 +72,9 @@ public class Message {
      * @return
      */
     byte[] enMessage() {
-        logger.debug("准备报文长度：{},内容长度:{},本包序号:{},本包确认号:{}", this.contentLength + Message.HEAD_LENGTH, this.contentLength, this.sequence, this.acknolegment);
+        logger.debug("准备报文长度：{},内容长度:{},本包序号:{},本包确认号:{},SYN:{},ACK:{},FIN:{}",
+                this.contentLength + Message.HEAD_LENGTH,
+                this.contentLength, this.sequence, this.acknolegment,this.SYN,this.ACK,this.FIN);
 
         byte[] head = new byte[HEAD_LENGTH];
         Arrays.fill(head, (byte) 0);
@@ -126,6 +128,7 @@ public class Message {
         head[26] = (byte) (contentLength & 0x00ff);
 
         //add CRC to head
+//        logger.debug("{},{},{}",crc16.length,HEAD_LENGTH-CRC_LENGTH,CRC_LENGTH);
         System.arraycopy(this.crc16, 0, head, HEAD_LENGTH-CRC_LENGTH, CRC_LENGTH);
 
         // 如果该Message中的content字段为空
@@ -159,6 +162,7 @@ public class Message {
         m.setMss((short) (((message[15] & CLEAN) << 8) | message[16] & CLEAN));
         m.setTime(((long) (message[17] & CLEAN) << 56) | ((long) (message[18] & CLEAN) << 48) | ((long) (message[19] & CLEAN) << 40)
                 | ((long) (message[20] & CLEAN) << 32) | ((long) (message[21] & CLEAN) << 24) | ((long) (message[22] & CLEAN) << 16) | ((long) (message[23] & CLEAN) << 8) | ((long) message[24] & CLEAN));
+        m.setContentLength((short) (((message[25] & CLEAN) << 8) | message[26] & CLEAN));
 
         byte[] crc = new byte[CRC_LENGTH];
         System.arraycopy(message, 27, crc, 0, CRC_LENGTH);
@@ -170,7 +174,8 @@ public class Message {
         m.setContent(con);
 
         // TODO: 2019-06-04 这里的方法有问题：获取dataContent好像不太对
-        logger.debug("接收到报文，数据内容长度:{},报文序号{},报文确认号{}", m.contentLength, m.getSequence(),m.getAcknolegment());
+        logger.debug("接收到报文，数据内容长度:{},报文序号{},报文确认号{},SYN:{},ACK:{},FIN:{}", m.contentLength, m.getSequence(),
+                m.getAcknolegment(),m.SYN,m.ACK,m.FIN);
         return m;
     }
 
