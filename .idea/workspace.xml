@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd858dfe-e52b-44d1-b656-61cf8903ec5c" name="Default Changelist" comment="" />
-    <ignored path="$PROJECT_DIR$/out/" />
+    <list default="true" id="4b6acc66-1403-4b56-8893-623db2327f73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_errorprone_error_prone_annotations_2_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_failureaccess_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_27_1_jre.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_j2objc_j2objc_annotations_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_checkerframework_checker_qual_2_5_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_codehaus_mojo_animal_sniffer_annotations_1_17.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jetbrains_annotations_17_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_26.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_26.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Receiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Receiver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReceiverState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ReceiverState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SenderState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SenderState.class" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,20 +39,25 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FavoritesManager">
-    <favorites_list name="test" />
-  </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5071531">
+    <splitter split-orientation="horizontal" split-proportion="0.50692964">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="9430">
-                  <caret line="599" column="37" selection-start-line="599" selection-start-column="37" selection-end-line="599" selection-end-column="37" />
+                <state relative-caret-position="-12">
+                  <caret line="405" column="41" lean-forward="true" selection-start-line="405" selection-start-column="41" selection-end-line="405" selection-end-column="41" />
                   <folding>
-                    <element signature="class#SenderState#0" />
+                    <element signature="imports" expanded="true" />
+                    <element signature="docComment;class#Receiver#0" />
+                    <element signature="e#903#933#0" />
+                    <element signature="e#972#994#0" />
+                    <element signature="e#1444#1473#0" />
+                    <element signature="e#1510#1549#0" />
+                    <element signature="e#1588#1631#0" />
+                    <element signature="e#9460#9487#0" />
+                    <element signature="e#10944#11514#0" />
                   </folding>
                 </state>
               </provider>
@@ -35,25 +66,10 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1235">
-                  <caret line="69" selection-start-line="69" selection-end-line="69" />
+                <state relative-caret-position="126">
+                  <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
                   <folding>
-                    <element signature="e#3485#5291#0" expanded="true" />
-                    <element signature="e#5297#5421#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="123">
-                  <caret line="308" column="26" selection-start-line="308" selection-start-column="26" selection-end-line="308" selection-end-column="26" />
-                  <folding>
-                    <element signature="docComment;class#Receiver#0" />
-                    <element signature="e#9072#12791#1" />
-                    <element signature="class#ReceiverState#0" />
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -62,25 +78,52 @@
         </leaf>
       </split-first>
       <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+        <leaf>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1992">
-                  <caret line="377" selection-start-line="377" selection-end-line="377" />
+                <state relative-caret-position="340">
+                  <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
                   <folding>
+                    <element signature="imports" expanded="true" />
                     <element signature="docComment;class#Receiver#0" />
-                    <element signature="e#8241#12797#0" expanded="true" />
-                    <element signature="e#8546#8584#1" />
-                    <element signature="e#8598#8674#0" />
-                    <element signature="e#8707#8751#0" />
-                    <element signature="e#8765#8831#0" />
-                    <element signature="e#8858#8902#0" />
-                    <element signature="e#12912#12985#0" />
-                    <element signature="e#13008#13060#0" />
-                    <element signature="e#11104#11719#0" />
-                    <element signature="e#11742#11802#0" />
-                    <element signature="class#ReceiverState#0" />
+                    <element signature="e#903#933#0" />
+                    <element signature="e#972#994#0" />
+                    <element signature="e#1444#1473#0" />
+                    <element signature="e#1510#1549#0" />
+                    <element signature="e#1588#1631#0" />
+                    <element signature="e#1795#1804#0" />
+                    <element signature="e#3406#3415#0" />
+                    <element signature="e#6724#6811#0" />
+                    <element signature="e#7391#7709#0" />
+                    <element signature="e#7530#7636#0" />
+                    <element signature="e#8590#8628#1" />
+                    <element signature="e#8642#8718#0" />
+                    <element signature="e#8751#8795#0" />
+                    <element signature="e#8809#8875#0" />
+                    <element signature="e#8902#8946#0" />
+                    <element signature="e#9460#9487#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="72">
+                  <caret line="694" selection-start-line="694" selection-end-line="694" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="docComment;class#Sender#0" />
+                    <element signature="e#3827#3833#0" />
+                    <element signature="e#5863#5915#0" />
+                    <element signature="e#9590#9679#0" />
+                    <element signature="e#10560#10606#0" />
+                    <element signature="e#18841#18986#0" expanded="true" />
+                    <element signature="e#18985#18986#0" expanded="true" />
+                    <element signature="e#18592#18919#0" />
+                    <element signature="class#SenderState#0" />
                   </folding>
                 </state>
               </provider>
@@ -90,36 +133,15 @@
       </split-second>
     </splitter>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Enum" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindBugs-IDEA-Workspace">
-    <toolWindowEditorPreview>false</toolWindowEditorPreview>
-  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>0xff</find>
-      <find>logger</find>
-      <find>send</find>
-      <find>right</find>
-      <find>SYNACK</find>
-      <find>writeInto</find>
-      <find>writeIn</find>
-      <find>hasSentButNotAcked</find>
-      <find>isDrop</find>
-      <find>receive</find>
-      <find>receiveMess</find>
-      <find>duplica</find>
-      <find>retrans</find>
+      <find>参数数量不足，请重新启动程序</find>
+      <find>changeState(SenderState.ESTABLISHED)</find>
+      <find>new Message</find>
+      <find>setData</find>
+      <find>drop</find>
+      <find>getDrop</find>
     </findStrings>
-    <replaceStrings>
-      <replace>CLEAN</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -127,43 +149,21 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/sender.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Util.java" />
-        <option value="$PROJECT_DIR$/src/main/java/State.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$USER_HOME$/.m2/settings.xml" />
-        <option value="$PROJECT_DIR$/debug.log" />
-        <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/file.txt" />
         <option value="$PROJECT_DIR$/src/main/java/Message.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
         <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
       </list>
     </option>
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="E:/tools/maven" />
-      </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="createModuleGroups" value="true" />
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
-    </option>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="953" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
   </component>
-  <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
-    <option name="width" value="510" />
-    <option name="height" value="877" />
-  </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -174,60 +174,32 @@
               <item name="test" type="b2602c69:ProjectViewProjectNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
             <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="test" type="b2602c69:ProjectViewProjectNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="58d84e3e:PackageViewProjectNode" />
+              <item name="test" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Course" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559389404334" />
-    <property name="extract.method.default.visibility" value="packageLocal" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.path.for.package.eslint" value="project" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
-    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.26666668" />
-    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-  </component>
-  <component name="RecentsManager">
-    <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="Receiver" />
-    </key>
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -242,36 +214,29 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Sender">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="test" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Receiver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Receiver" />
       <module name="test" />
-      <option name="PROGRAM_PARAMETERS" value="receive.txt 127.0.0.1 6666 0.2 1234 200 0.1 5678" />
+      <option name="PROGRAM_PARAMETERS" value="receive.txt 127.0.0.1 8080 0.7 100 2000 0.7 200" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Sender" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Sender" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Sender" />
       <module name="test" />
-      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 6666 0.2 1077 200 0.1 5678 8 32 1000" />
+      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 8080 0.4 100 2000 0.4 100 8 32 2000" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Sender" />
-      <item itemvalue="Application.Main" />
       <item itemvalue="Application.Receiver" />
+      <item itemvalue="Application.Sender" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Sender" />
         <item itemvalue="Application.Receiver" />
       </list>
     </recent_temporary>
@@ -281,316 +246,202 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="bd858dfe-e52b-44d1-b656-61cf8903ec5c" name="Default Changelist" comment="" />
-      <created>1557060061163</created>
+      <changelist id="4b6acc66-1403-4b56-8893-623db2327f73" name="Default Changelist" comment="" />
+      <created>1559646592797</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1557060061163</updated>
-      <workItem from="1557060065001" duration="3510000" />
-      <workItem from="1557562174092" duration="368000" />
-      <workItem from="1557823813067" duration="65000" />
-      <workItem from="1558409419507" duration="2065000" />
-      <workItem from="1558454122010" duration="752000" />
-      <workItem from="1558454989286" duration="1282000" />
-      <workItem from="1558456827737" duration="2382000" />
-      <workItem from="1558505055990" duration="7716000" />
-      <workItem from="1558526884083" duration="4580000" />
-      <workItem from="1558539138429" duration="6193000" />
-      <workItem from="1558577324534" duration="8968000" />
-      <workItem from="1558598713478" duration="3010000" />
-      <workItem from="1558603157415" duration="466000" />
-      <workItem from="1558603665519" duration="3153000" />
-      <workItem from="1558615236208" duration="2598000" />
-      <workItem from="1559182419785" duration="174000" />
-      <workItem from="1559182708998" duration="8341000" />
-      <workItem from="1559199790941" duration="4292000" />
-      <workItem from="1559440857773" duration="571000" />
-      <workItem from="1559443917536" duration="1179000" />
-      <workItem from="1559455645413" duration="55000" />
-      <workItem from="1559455713035" duration="815000" />
-      <workItem from="1559487520696" duration="2373000" />
-      <workItem from="1559519899756" duration="12070000" />
-      <workItem from="1559542287078" duration="9852000" />
-      <workItem from="1559552859425" duration="2279000" />
-      <workItem from="1559561313828" duration="10736000" />
-      <workItem from="1559606081230" duration="12372000" />
-      <workItem from="1559661405390" duration="188000" />
-      <workItem from="1559714677487" duration="11553000" />
-      <workItem from="1559729016649" duration="1297000" />
+      <updated>1559646592797</updated>
     </task>
-    <task id="LOCAL-00001" summary="update">
-      <created>1559617030852</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1559617030852</updated>
-    </task>
-    <task id="LOCAL-00002" summary="edit">
-      <created>1559619368022</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1559619368022</updated>
-    </task>
-    <task id="LOCAL-00003" summary="修改Receiver结构">
-      <created>1559730092792</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1559730092792</updated>
-    </task>
-    <task id="LOCAL-00004" summary="修改Receiver结构">
-      <created>1559730226051</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1559730226051</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125255000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12875536" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.20202559" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="JRebel" order="2" side_tool="true" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" weight="0.3296" />
-      <window_info id="Designer" order="7" />
-      <window_info id="DB Browser" order="8" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3278496" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" weight="0.31609872" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.77982646" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.6767896" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32902467" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
-      <window_info anchor="bottom" id="MyBatis Sql Log" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.54031116" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50363785" side_tool="true" visible="true" weight="0.5840188" />
-      <window_info anchor="bottom" id="Run with VisualVM" order="12" weight="0.40876946" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" />
-      <window_info anchor="bottom" id="JRebel Executor" order="15" />
-      <window_info anchor="bottom" id="JRebel Console" order="16" side_tool="true" weight="0.32956153" />
-      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.4987874" weight="0.32549942" />
-      <window_info anchor="bottom" id="Debug with VisualVM" order="18" weight="0.19094767" />
-      <window_info anchor="bottom" id="Tail" order="19" />
-      <window_info anchor="bottom" id="SonarLint" order="20" />
-      <window_info anchor="bottom" id="Extract Method" order="21" weight="0.659805" />
-      <window_info anchor="bottom" id="DB Execution Console" order="22" />
-      <window_info anchor="bottom" id="Educational.CheckDetails" order="23" />
-      <window_info anchor="bottom" id="CheckStyle" order="24" />
-      <window_info anchor="bottom" id="Statistic" order="25" weight="0.3278496" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="RestServices" order="5" />
-      <window_info anchor="right" id="Mybatis datasource" order="6" side_tool="true" />
-      <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Key Promoter X" order="8" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" id="Palette&#9;" order="10" />
-      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12875536" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.202407" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="JRebel" order="2" side_tool="true" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" weight="0.3296" />
-      <window_info id="Designer" order="7" />
-      <window_info id="DB Browser" order="8" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3278496" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" weight="0.31609872" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.31325302" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3383948" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32902467" />
-      <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
-      <window_info anchor="bottom" id="MyBatis Sql Log" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.54031116" />
-      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50363785" side_tool="true" weight="0.58441556" />
-      <window_info anchor="bottom" id="Run with VisualVM" order="12" weight="0.40876946" />
-      <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" />
-      <window_info anchor="bottom" id="JRebel Executor" order="15" />
-      <window_info anchor="bottom" id="JRebel Console" order="16" side_tool="true" weight="0.32956153" />
-      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.4987874" weight="0.32549942" />
-      <window_info anchor="bottom" id="Debug with VisualVM" order="18" weight="0.19094767" />
-      <window_info anchor="bottom" id="Tail" order="19" />
-      <window_info anchor="bottom" id="SonarLint" order="20" />
-      <window_info anchor="bottom" id="Extract Method" order="21" weight="0.659805" />
-      <window_info anchor="bottom" id="DB Execution Console" order="22" />
-      <window_info anchor="bottom" id="Educational.CheckDetails" order="23" />
-      <window_info anchor="bottom" id="CheckStyle" order="24" />
-      <window_info anchor="bottom" id="Statistic" order="25" weight="0.3278496" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.329718" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" />
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="right" id="RestServices" order="5" />
-      <window_info anchor="right" id="Mybatis datasource" order="6" side_tool="true" />
-      <window_info anchor="right" id="Database" order="7" />
-      <window_info anchor="right" id="Key Promoter X" order="8" />
-      <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info anchor="right" id="Palette&#9;" order="10" />
-      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout-to-restore>
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Sender.java</url>
+          <line>679</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression=".getString(R.string.)" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="update" />
-    <MESSAGE value="edit" />
-    <MESSAGE value="修改Receiver结构" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改Receiver结构" />
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>.getString(R.string.)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>right</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>left</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/lang/StringLatin1.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/lang/System.java" />
-    <entry file="file://$PROJECT_DIR$/out/production/test/Main.class" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/lang/Object.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/27.1-jre/guava-27.1-jre.jar!/com/google/common/base/Objects.class" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/io/Serializable.java" />
-    <entry file="file://$PROJECT_DIR$/Person.txt" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/net/InetAddress.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/net/DatagramSocket.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/net/DualStackPlainDatagramSocketImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/State.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.6/lombok-1.18.6-sources.jar!/lombok/AllArgsConstructor.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.6/lombok-1.18.6-sources.jar!/lombok/RequiredArgsConstructor.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.6/lombok-1.18.6-sources.jar!/lombok/NonNull.java" />
-    <entry file="file://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j13/1.0.1/slf4j-log4j13-1.0.1.pom" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties.properties" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j13/1.0.1/slf4j-log4j13-1.0.1.jar!/org/slf4j/impl/Log4jLoggerAdapter.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.6/lombok-1.18.6-sources.jar!/lombok/Data.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/net/DatagramPacket.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/lang/Integer.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/lang/Short.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar!/org/apache/log4j/Hierarchy.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar!/org/apache/log4j/Priority.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar!/org/apache/log4j/Category.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/lang/String.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26-sources.jar!/org/slf4j/helpers/MessageFormatter.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.26/slf4j-log4j12-1.7.26.jar!/org/slf4j/impl/Log4jLoggerAdapter.class" />
-    <entry file="file://$USER_HOME$/.m2/settings.xml" />
-    <entry file="file://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-240" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
       </provider>
-    </entry>
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/util/concurrent/RejectedExecutionHandler.java" />
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/util/concurrent/LinkedBlockingQueue.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="44" selection-start-column="44" selection-end-column="48" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://E:/tools/java/jdk11/lib/src.zip!/java.base/java/util/concurrent/ThreadPoolExecutor.java" />
-    <entry file="jar://E:/Software/Java/jdk-8/src.zip!/java/net/DatagramSocket.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/Util.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/Connect.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="745" column="16" selection-start-line="745" selection-start-column="16" selection-end-line="745" selection-end-column="16" />
-          <folding>
-            <element signature="e#27410#27958#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/System.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
-          <caret line="29" column="55" lean-forward="true" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret column="360" selection-start-column="360" selection-end-column="360" />
+          <caret line="493" column="48" selection-start-line="493" selection-start-column="48" selection-end-line="493" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/receive.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/net/DatagramSocket.java">
+    <entry file="file://$PROJECT_DIR$/file.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="657" column="22" selection-start-line="657" selection-start-column="22" selection-end-line="657" selection-end-column="22" />
+        <state>
+          <caret column="255" selection-start-column="255" selection-end-column="255" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9430">
-          <caret line="599" column="37" selection-start-line="599" selection-start-column="37" selection-end-line="599" selection-end-column="37" />
-          <folding>
-            <element signature="class#SenderState#0" />
-          </folding>
+        <state relative-caret-position="152">
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        <state relative-caret-position="126">
+          <caret line="173" column="26" lean-forward="true" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="26" />
           <folding>
-            <element signature="e#3485#5291#0" expanded="true" />
-            <element signature="e#5297#5421#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="308" column="26" selection-start-line="308" selection-start-column="26" selection-end-line="308" selection-end-column="26" />
+        <state relative-caret-position="340">
+          <caret line="421" lean-forward="true" selection-start-line="421" selection-end-line="421" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="docComment;class#Receiver#0" />
-            <element signature="e#9072#12791#1" />
-            <element signature="class#ReceiverState#0" />
+            <element signature="e#903#933#0" />
+            <element signature="e#972#994#0" />
+            <element signature="e#1444#1473#0" />
+            <element signature="e#1510#1549#0" />
+            <element signature="e#1588#1631#0" />
+            <element signature="e#1795#1804#0" />
+            <element signature="e#3406#3415#0" />
+            <element signature="e#6724#6811#0" />
+            <element signature="e#7391#7709#0" />
+            <element signature="e#7530#7636#0" />
+            <element signature="e#8590#8628#1" />
+            <element signature="e#8642#8718#0" />
+            <element signature="e#8751#8795#0" />
+            <element signature="e#8809#8875#0" />
+            <element signature="e#8902#8946#0" />
+            <element signature="e#9460#9487#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="694" selection-start-line="694" selection-end-line="694" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="docComment;class#Sender#0" />
+            <element signature="e#3827#3833#0" />
+            <element signature="e#5863#5915#0" />
+            <element signature="e#9590#9679#0" />
+            <element signature="e#10560#10606#0" />
+            <element signature="e#18841#18986#0" expanded="true" />
+            <element signature="e#18985#18986#0" expanded="true" />
+            <element signature="e#18592#18919#0" />
+            <element signature="class#SenderState#0" />
           </folding>
         </state>
       </provider>
@@ -612,11 +463,10 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.26666668" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -624,11 +474,10 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>tomcat</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.26666668" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -636,11 +485,10 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.26666668" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
@@ -652,20 +500,8 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.26666668" />
-                <option value="0.6" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
                 <option value="0.2" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -673,11 +509,10 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Maven: log4j:log4j:1.2.17</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.26666668" />
+                <option value="0.2" />
               </list>
             </option>
           </splitter-proportions>
