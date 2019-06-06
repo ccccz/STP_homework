@@ -49,7 +49,7 @@ public class Message {
     private boolean FIN;
     private short window;
     /**
-     * 数据最大长度字节: 1500 - 20(IP) - 8 (UDP) = 1472  short:32768‬
+     * 数据最大长度字节: 1500 - 20(IP) - 8 (UDP) = 1472  short:32768‬ / 2 = 16384
      */
     private short mss;
     private long time;  // todo:发送时间，发送前设置，isDelay前
@@ -93,16 +93,13 @@ public class Message {
 
         byte[] crc = new byte[CRC_LENGTH];
         System.arraycopy(message, 27, crc, 0, CRC_LENGTH);
+
         m.setCrc16(crc);
 
-        // TODO: 2019-06-03 如果收到的packet中data字段为空呢？
         byte[] con = new byte[m.getContentLength()];
         System.arraycopy(message, HEAD_LENGTH, con, 0, m.getContentLength());
         m.setContent(con);
 
-        // TODO: 2019-06-04 这里的方法有问题：获取dataContent好像不太对
-        logger.debug("接收到报文，数据内容长度:{},报文序号{},报文确认号{},SYN:{},ACK:{},FIN:{}", m.contentLength, m.getSequence(),
-                m.getAcknolegment(), m.SYN, m.ACK, m.FIN);
         return m;
     }
 
@@ -127,10 +124,6 @@ public class Message {
      * @return
      */
     byte[] enMessage() {
-        logger.debug("准备报文长度：{},内容长度:{},本包序号:{},本包确认号:{},SYN:{},ACK:{},FIN:{}",
-                this.contentLength + Message.HEAD_LENGTH,
-                this.contentLength, this.sequence, this.acknolegment, this.SYN, this.ACK, this.FIN);
-
         byte[] head = new byte[HEAD_LENGTH];
         Arrays.fill(head, (byte) 0);
 
@@ -179,7 +172,7 @@ public class Message {
         head[23] = (byte) ((time >>> 8) & CLEAN);
         head[24] = (byte) (time & CLEAN);
 
-        head[25] = (byte) ((contentLength & CLEAN) >>> 8);
+        head[25] = (byte) ((contentLength >>> 8) & CLEAN);
         head[26] = (byte) (contentLength & 0x00ff);
 
         //add CRC to head
@@ -191,7 +184,6 @@ public class Message {
             return head;
         }
         head = Arrays.copyOf(head, head.length + this.content.length);
-//        logger.debug("装载的内容长度：{}",this.content.length);
         System.arraycopy(this.content, 0, head, HEAD_LENGTH, this.content.length);
         return head;
     }
