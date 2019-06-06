@@ -633,31 +633,18 @@ public class Sender {
 
 				timer = new Timer();
 				timerHashMap.put(sequence, timer);  // 保存当前包的Timer
-				timerTask = new TimerTask() {
-					@Override
-					public void run() {
-//						logger.error("sequence:{},byteHasAcked:{}，byteHasSend:{},left:{},right:{}",sequence,byteHasAcked,
-//								byteHasSent,left,right);
-						if (sequence >= byteHasAcked) {
-							logger.error("===========sequence:{},byteHasAcked:{}," +
-											"byteHasSend:{},left:{},right:{}，timerHashMap:{}===========",
-									sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
-							retransmit(sequence);
-						}
-//						timerHashMap.keySet().forEach(
-//								key->{
-//									retransmit(key);
-//								}
-//						);
-//						if (sequence < left) {
-//							timerHashMap.get(sequence).cancel();
-//							timerHashMap.remove(sequence);
-//						}
-//						logger.debug("==========timerHashMap:{}",timerHashMap);
-					}
-				};
-				timer.schedule(timerTask, initalTimeout, initalTimeout);
 
+				if (sequence <= byteHasAcked) {
+					logger.info("===========sequence:{},byteHasAcked:{}," +
+									"byteHasSend:{},left:{},right:{}，timerHashMap:{}===========",
+							sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
+					retransmit(sequence);
+				}
+				try {
+					sleep(maxDelay);
+				} catch (InterruptedException i) {
+					i.printStackTrace();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -676,9 +663,7 @@ public class Sender {
 			toSendMessage = new Message();
 			toSendMessage.setFIN(true);
 			toSendMessage.setSequence(toSendSequence);
-			toSendMessage.setContent(toSendData);
-			byte[] toSendCRC = CRC16.generateCRC(toSendData);
-			toSendMessage.setCrc16(toSendCRC);
+			toSendMessage.setContent(new byte[]{});
 			toSendMessage.setTime((new Date()).getTime());
 		}
 
@@ -696,7 +681,7 @@ public class Sender {
 				// TODO: 2019-06-06 我发现一件很奇怪的事情：下面的这一行如果没有的话，程序就会出错。qiao，为什么？！
 			//	logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
 
-				while (byteHasSent < right) {
+				if (byteHasSent < right) {
 					sendMessageBySequence(byteHasSent);
 					logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
 				}

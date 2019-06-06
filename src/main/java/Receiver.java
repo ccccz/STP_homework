@@ -419,6 +419,7 @@ public class Receiver{
                     // 如果在接收窗口中，没有Receiver期望接收到的sequence，就不必更改toSendAcknolegment
                     // 如果在接收窗口中，已经有了Receiver期望接收到的sequence，就更改toSendAcknolegment，增加该包中数据的长度到toSendAcknolegment中
                     toSendAcknowlegment += window.get(toSendAcknowlegment).length;
+                    logger.info("toSendAckno++ {}",toSendAcknowlegment);
                 }
 
                 setACKMessage();
@@ -427,10 +428,11 @@ public class Receiver{
                 try {
                     outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, des_address);
                     datagramSocket.send(outDatagramPacket);
+                    logger.error("send ACK:{}",toSendAcknowlegment);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                logger.error("send ACK:{}",toSendAcknowlegment);
 
                 // 将按顺序到达的data写入文件
                 logger.error("window:{},byteHasWrite:{}",window,byteHasWrite);
