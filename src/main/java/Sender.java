@@ -175,7 +175,7 @@ public class Sender {
                 e.printStackTrace();
             }
         } else {
-            logger.error("发送：sequence丢包：{}", msg.getSequence());
+            logger.debug("发送：sequence丢包：{}", msg.getSequence());
         }
     }
 
@@ -462,8 +462,13 @@ public class Sender {
                 }
 
                 while (byteHasSent < right && partSendWindow.size() < wd) {
+                    try {
+                        Thread.sleep(initalTimeout / (wd / 2));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     sendMessageBySequence(byteHasSent);
-                    logger.info("发送：已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
+                    logger.info("发送： 窗口：{}-{}-{}", left, byteHasSent, right);
                 }
             }
         }
