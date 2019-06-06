@@ -62,8 +62,8 @@ public class Sender {
 	 */
 	private int right;
 	private BufferedInputStream bufferedInputStream;
-//	private byte[] window;
-	private HashMap<Integer, byte[]> hasSentButNotAcked=new HashMap<>();  // 存储已经发送的，但还没有收到确认的数据
+	//	private byte[] window;
+	private HashMap<Integer, byte[]> hasSentButNotAcked = new HashMap<>();  // 存储已经发送的，但还没有收到确认的数据
 
 //    /**
 //     * 窗口
@@ -109,8 +109,8 @@ public class Sender {
 				Double.parseDouble(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]),
 				Double.parseDouble(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8]),
 				Integer.parseInt(args[9]), Integer.parseInt(args[10]));
-		 sender.setRandomDelay(new Random((long) sender.seedDelay));
-		 sender.setRandomDrop(new Random((long) sender.seedDrop));
+		sender.setRandomDelay(new Random((long) sender.seedDelay));
+		sender.setRandomDrop(new Random((long) sender.seedDrop));
 //		sender.window = new ArrayList<>(sender.mws);
 //		ThreadFactory f = new ThreadFactoryBuilder().setNameFormat("发送数据包-%d").build();
 //		sender.toSend = new ThreadPoolExecutor(sender.mws, sender.mws + 2, sender.getInitalTimeout(), TimeUnit.MILLISECONDS,
@@ -183,8 +183,12 @@ public class Sender {
 			try {
 				outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length,
 						new InetSocketAddress(disIP, disPort));
+				int delay = getDelay();
+				Thread.sleep(delay);
 				datagramSocket.send(outDatagramPacket);
 			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
@@ -508,7 +512,7 @@ public class Sender {
 			int duplicateACK = 1;  // 记录重复收到的ACK数量
 
 			while (true) {
-				logger.error("==================");
+//				logger.error("==================");
 				// 接收Receiver发送的数据
 				receiveMessage();
 
@@ -526,7 +530,7 @@ public class Sender {
 //							byteHasAcked,receivedMessage.getAcknolegment());
 					if (byteHasAcked < receivedMessage.getAcknolegment()) {
 						byteHasAcked = receivedMessage.getAcknolegment();  // 更新已经确认的ACK号
-						logger.debug("update byteHasAcked:{}",byteHasAcked);
+						logger.debug("update byteHasAcked:{}", byteHasAcked);
 						// 移动滑动窗口的左侧
 						left = receivedMessage.getAcknolegment();
 						duplicateACK = 1;
@@ -536,6 +540,7 @@ public class Sender {
 						} else {
 							right = left + fileLength - left;
 						}
+						logger.debug("left:{},right:{},byteHasSent:{}", left, right, byteHasSent);
 					}
 				} else if (receivedMessage.getAcknolegment() == byteHasAcked) {  // 收到重复的ACK Num确认号
 					duplicateACK++;
@@ -574,9 +579,18 @@ public class Sender {
 		private byte[] toSendData;
 		ScheduledThreadPoolExecutor scheduled = new ScheduledThreadPoolExecutor(mws);
 		HashMap<Integer, Timer> timerHashMap = new HashMap<>();  // 存储各个包的Timer
+		//		TimerTask timerTask = new TimerTask() {
+//			@Override
+//			public void run() {
+//				logger.debug("===============================");
+////				for (int i = byteHasAcked; i <= right; i++) {
+////					retransmit(i);
+////				}
+//			}
+//		};
+		TimerTask timerTask;
 
 		private Timer timer;
-		private TimerTask timerTask;
 
 		Transfer() {
 			//todo：放入main
@@ -609,40 +623,42 @@ public class Sender {
 
 		private void sendMessageBySequence(int sequence) {
 			try {
-//				logger.debug("sendMessageBySequence: sequence-{}", sequence);
 				int dataLength = sequence + mss <= right ? mss : right - sequence;
 				toSendData = new byte[dataLength];
 				bufferedInputStream.read(toSendData, 0, dataLength);
-//				logger.debug("toSendData:{}", toSendData);
 				toSendSequence = sequence;
 				setDataMessage();
 				// 发送data packet
 				sendMessage();
 				hasSentButNotAcked.put(toSendSequence, toSendData);
 				byteHasSent += dataLength;
-//				logger.debug("已经发送的比特数量：{}", byteHasSent);
-
-
-//				scheduled.scheduleAtFixedRate(new Runnable() {
-//					@Override
-//					public void run() {
-//						if (sequence<=byteHasAcked)
-//						retransmit(sequence);
-//					}
-//				}, 0, initalTimeout, TimeUnit.MILLISECONDS);
 
 				timer = new Timer();
 				timerHashMap.put(sequence, timer);  // 保存当前包的Timer
 				timerTask = new TimerTask() {
 					@Override
 					public void run() {
+//						logger.error("sequence:{},byteHasAcked:{}，byteHasSend:{},left:{},right:{}",sequence,byteHasAcked,
+//								byteHasSent,left,right);
 						if (sequence >= byteHasAcked) {
-							logger.error("sequence:{},byteHasAcked:{}",sequence,byteHasAcked);
+							logger.error("===========sequence:{},byteHasAcked:{}," +
+											"byteHasSend:{},left:{},right:{}timerHashMap:{}===========",
+									sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
 							retransmit(sequence);
 						}
+//						timerHashMap.keySet().forEach(
+//								key->{
+//									retransmit(key);
+//								}
+//						);
+//						if (sequence < left) {
+//							timerHashMap.get(sequence).cancel();
+//							timerHashMap.remove(sequence);
+//						}
+//						logger.debug("==========timerHashMap:{}",timerHashMap);
 					}
 				};
-				timer.schedule(timerTask,initalTimeout,initalTimeout);
+				timer.schedule(timerTask, initalTimeout, initalTimeout);
 
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -652,10 +668,10 @@ public class Sender {
 		private void retransmit(int sequence) {
 			toSendSequence = sequence;
 			toSendData = hasSentButNotAcked.get(sequence);
-			logger.debug("retransmit toSendData:{}",toSendData);
+//			logger.debug("retransmit sequence:{}", sequence);
 			setDataMessage();
 			sendMessage();
-			logger.debug("已经重新发送sequence：{}",sequence);
+			logger.debug("===========================已经重新发送sequence：{}", sequence);
 		}
 
 		private void setFINMessage() {
@@ -671,31 +687,27 @@ public class Sender {
 		@Override
 		public void run() {
 			logger.debug("Transfer run()!");
+//			timer = new Timer();
+//			timer.schedule(timerTask, initalTimeout, initalTimeout);
 
 			while (senderState == SenderState.ESTABLISHED) {
 				// 将byteHasSent-right段的数据全部发送出去
-				logger.error("==================");
+				logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
+				while (byteHasSent < right) {
+					sendMessageBySequence(byteHasSent);
+					logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
+				}
 
-				while (byteHasAcked <= fileLength) {
-					logger.error("==================");
-					while (byteHasSent < right) {
-						logger.error("==================");
+				// 根据指定的序列号重传数据
+//				if (isNeedRetransmit) {
+//					logger.info("快速重传：字节序号{}", retransmitSequence);
+//					retransmit(retransmitSequence);
+//				}
 
-						sendMessageBySequence(byteHasSent);
-						logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
-					}
-
-					// 根据指定的序列号重传数据
-					if (isNeedRetransmit) {
-						logger.info("快速重传：字节序号{}", retransmitSequence);
-						retransmit(retransmitSequence);
-					}
-
-					// 如果文件发送完了，就发送FIN packet
-					if (byteHasAcked == fileLength) {
-						setFINMessage();
-						sendMessage();
-					}
+				// 如果文件发送完了，就发送FIN packet
+				if (byteHasAcked == fileLength) {
+					setFINMessage();
+					sendMessage();
 				}
 			}
 		}
