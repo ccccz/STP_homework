@@ -1,8 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Date;
 
-public  class CRC16 {
+public class CRC16 {
 
 
     /**
@@ -30,14 +28,15 @@ public  class CRC16 {
         }
         return intToBytes(crc);
     }
+
     /**
      * 将int转换成byte数组，低位在前，高位在后
      * 改变高低位顺序只需调换数组序号
      */
-    private static byte[] intToBytes(int value)  {
+    private static byte[] intToBytes(int value) {
         byte[] src = new byte[2];
-        src[1] =  (byte) ((value>>8) & 0xFF);
-        src[0] =  (byte) (value & 0xFF);
+        src[1] = (byte) ((value >> 8) & 0xFF);
+        src[0] = (byte) (value & 0xFF);
         return src;
     }
 
@@ -45,7 +44,7 @@ public  class CRC16 {
         byte[] content = message.getContent();
         byte[] currentCRC = message.getCrc16();
         byte[] correctCRC = generateCRC(content);
-        return Arrays.equals(currentCRC,correctCRC);
+        return Arrays.equals(currentCRC, correctCRC);
     }
 
     //TEST

@@ -1,1 +1,7 @@
-/target
+/target/
+/.vscode/
+/.settings/
+/classes/
+/.classpath
+/.project
+/receive.txt
