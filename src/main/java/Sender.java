@@ -640,7 +640,7 @@ public class Sender {
 //								byteHasSent,left,right);
 						if (sequence >= byteHasAcked) {
 							logger.error("===========sequence:{},byteHasAcked:{}," +
-											"byteHasSend:{},left:{},right:{}timerHashMap:{}===========",
+											"byteHasSend:{},left:{},right:{}，timerHashMap:{}===========",
 									sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
 							retransmit(sequence);
 						}
@@ -685,28 +685,30 @@ public class Sender {
 		@Override
 		public void run() {
 			logger.debug("Transfer run()!");
-//			timer = new Timer();
-//			timer.schedule(timerTask, initalTimeout, initalTimeout);
 
 			while (senderState == SenderState.ESTABLISHED) {
+				// 如果文件发送完了，就发送FIN packet
+				if (byteHasAcked == fileLength) {
+					setFINMessage();
+					sendMessage();
+				}
 				// 将byteHasSent-right段的数据全部发送出去
-				logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
+				// TODO: 2019-06-06 我发现一件很奇怪的事情：下面的这一行如果没有的话，程序就会出错。qiao，为什么？！
+			//	logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
+
 				while (byteHasSent < right) {
 					sendMessageBySequence(byteHasSent);
 					logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
 				}
+//				do {
+//					sendMessageBySequence(byteHasSent);
+//				} while (byteHasSent < right);
 
 				// 根据指定的序列号重传数据
 //				if (isNeedRetransmit) {
 //					logger.info("快速重传：字节序号{}", retransmitSequence);
 //					retransmit(retransmitSequence);
 //				}
-
-				// 如果文件发送完了，就发送FIN packet
-				if (byteHasAcked == fileLength) {
-					setFINMessage();
-					sendMessage();
-				}
 			}
 		}
 	}
