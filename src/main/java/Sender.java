@@ -172,14 +172,14 @@ public class Sender {
             datagramSocket = new DatagramSocket();
         } catch (SocketException e) {
             e.printStackTrace();
-            logger.error("初始化:socket故障");
+            logger.error("Sender: 初始化:socket故障");
             System.exit(-1);
         }
     }
 
     public static void main(String[] args) {
         if (args.length != ARGS) {
-            System.out.println("参数数量不足，请重新启动程序");
+            System.out.println("Sender: 参数数量不足，请重新启动程序");
             return;
         }
 
@@ -217,14 +217,14 @@ public class Sender {
                 msg.setTime(Calendar.getInstance().getTimeInMillis());
                 Thread.sleep(delay);
                 datagramSocket.send(sendPac);
-                logger.debug("发送：已经发送sequence：{}，本次延时{}", msg.getSequence(), delay);
+                logger.debug("Sender: 已经发送sequence：{}，本次延时{}", msg.getSequence(), delay);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
-                logger.error("发送:发送数据包出现故障，sequence：{}", msg.getSequence());
+                logger.error("Sender: 发送数据包出现故障，sequence：{}", msg.getSequence());
                 System.exit(-1);
             }
         } else {
-            logger.debug("发送：sequence丢包：{}", msg.getSequence());
+            logger.debug("Sender: sequence丢包：{}", msg.getSequence());
         }
     }
 
@@ -240,7 +240,7 @@ public class Sender {
             return Message.deMessage(acceptBuffer);
         } catch (IOException e) {
             e.printStackTrace();
-            logger.error("接受:接受数据异常，程序退出");
+            logger.error("Sender: 接受数据异常，程序退出");
             System.exit(-1);
         }
         return new Message();
@@ -251,7 +251,7 @@ public class Sender {
      */
     private void changeState(SenderState s) {
         this.senderState = s;
-        logger.info("客户端状态改变为{}", s);
+        logger.info("Sender: 客户端状态改变为{}", s);
     }
 
     /**
@@ -316,12 +316,12 @@ public class Sender {
 
         @Override
         public void run() {
-            logger.info("Connect run()!");
+            logger.info("Sender: Connect run()!");
             // 只要连接还没有建立，就一直尝试建立连接
             while (senderState != SenderState.ESTABLISHED) {
                 // 发送"连接请求报文"，即SYN packet
                 sendMessage(setSYNMessage(seqNum++));
-                logger.debug("发送: 发送了SYN.");
+                logger.debug("Sender: 发送了SYN.");
                 if (senderState != SenderState.SYN_SENT) {
                     changeState(SenderState.SYN_SENT);
                 }
@@ -335,7 +335,7 @@ public class Sender {
             }
 
             sendMessage(setACKMessage());
-            logger.debug("发送: 发送了ACK.");
+            logger.debug("Sender: 发送了ACK.");
             // 连接已经建立，可以传输文件了
             transfer = new Transfer();
             transfer.start();
@@ -351,7 +351,7 @@ public class Sender {
     class Accept extends Thread {
         @Override
         public void run() {
-            logger.debug("Accept run()!");
+            logger.debug("Sender: Accept run()!");
 
             while (true) {
                 Message response = receiveMessage();
@@ -365,7 +365,7 @@ public class Sender {
                 } else if (response.isACK() && senderState == SenderState.ESTABLISHED) {
                     // 收到的包是数据包
                     int ackReply = response.getAcknolegment();
-                    logger.info("接受：收到确认包:{}", ackReply);
+                    logger.info("Sender: 收到确认包:{}", ackReply);
 
                     if ((part > 0 && (left + part == ackReply))
                             || left + mss < ackReply) {
@@ -384,26 +384,25 @@ public class Sender {
                             }
                             while (hasConfirmed.contains(left + mss)) {
                                 left += mss;
-                                logger.debug("左边更新left:{}，right:{}", left, right);
+                                logger.debug("Sender: 左边更新left:{}，right:{}", left, right);
                                 if (fileLength >= right + mss) {
                                     right = right + mss;
                                 } else {
                                     right = fileLength;
                                 }
-                                logger.debug("右边更新left:{}，right:{}", left, right);
+                                logger.debug("Sender: 右边更新left:{}，right:{}", left, right);
                             }
                         }
                     } else if (left - part != ackReply && left != ackReply) {
-                        logger.error("接受：回复包出现问题：{}---{}---{}===ackReply：{}", left, byteHasSent, right, ackReply);
-                        logger.error("====?????====");
+                        logger.error("Sender: 接受回复包出现问题：{}---{}---{}===ackReply：{}", left, byteHasSent, right, ackReply);
                     }
 
                     synchronized (lock) {
                         if (part != -1 && hasConfirmed.contains(left + part)) {
                             left += part;
-                            logger.debug("左边更新{}---{}", left, right);
+                            logger.debug("Sender: 左边更新{}---{}", left, right);
                             right = fileLength;
-                            logger.debug("右边更新{}---{}", left, right);
+                            logger.debug("Sender: 右边更新{}---{}", left, right);
                             partSendWindow.remove(ackReply - part);
                             part = -1;
                         } else if (ackReply == fileLength) {
@@ -412,11 +411,11 @@ public class Sender {
                             partSendWindow.remove(ackReply - mss);
                         }
                     }
-                    logger.debug("接受：目前窗口情况：{}---{}---{}", left, byteHasSent, right);
+                    logger.debug("Sender: 接受 目前窗口情况：{}---{}---{}", left, byteHasSent, right);
 
                 } else if (response.isFIN()) {
                     //收到包是终止包
-                    logger.debug("接受： receive FIN.");
+                    logger.debug("Sender: receive FIN.");
                     changeState(SenderState.CLOSED);
                     datagramSocket.close();
                     System.exit(0);
@@ -440,7 +439,7 @@ public class Sender {
             // 初始化滑动窗口的左右两边
             left = 0;
             right = mws > fileLength ? fileLength : mws;
-            logger.debug("发送：初始化滑动窗口，{}---{},mws:{}", left, right, mws);
+            logger.debug("Sender: 初始化滑动窗口，{}---{},mws:{}", left, right, mws);
             toSendSequence = 0;
         }
 
@@ -458,7 +457,7 @@ public class Sender {
         }
 
         private void sendMessageBySequence(int sequence) {
-            logger.warn("发送队列增加,{}", sequence);
+            logger.warn("Sender: 发送队列增加,{}", sequence);
             partSendWindow.put(sequence, fileParts.get(sequence));
             byteHasSent += fileParts.get(sequence).length;
             ResendThread r = new ResendThread(sequence);
@@ -478,11 +477,11 @@ public class Sender {
             public void run() {
                 if (partSendWindow.containsKey(x) && left < right) {
                     Transfer.this.transmit(x);
-                    logger.warn("{}重传次数：{}", x, n++);
+                    logger.warn("Sender: {}重传次数：{}", x, n++);
                 } else {
                     ScheduledFuture<?> future = threadPools.remove(x);
                     future.cancel(true);
-                    logger.warn("发送队列去除,{}", x);
+                    logger.warn("Sender: 发送队列去除,{}", x);
                 }
             }
         }
@@ -498,24 +497,24 @@ public class Sender {
             message.setSequence(toSendSequence);
             message.setContent(new byte[]{});
             message.setTime((new Date()).getTime());
-            logger.warn("fin包已经准备！！");
+            logger.warn("Sender: fin包已经准备！！");
             return message;
         }
 
         @Override
         public void run() {
-            logger.info("Transfer run()!");
+            logger.info("Sender: Transfer run()!");
 
             while (senderState == SenderState.ESTABLISHED) {
                 // 如果文件发送完了，就发送FIN packet
                 if (left == right) {
                     sendMessage(setFINMessage());
-                    logger.error("========发送完毕！！！=========");
+                    logger.error("Sender: ========发送完毕！！！=========");
                 }
                 synchronized (lock) {
                     while (left < right && byteHasSent < right && partSendWindow.size() < wd) {
                         sendMessageBySequence(byteHasSent);
-                        logger.info("发送：窗口：{}-{}-{}", left, byteHasSent, right);
+                        logger.info("Sender: 窗口：{}-{}-{}", left, byteHasSent, right);
                     }
                 }
             }
@@ -539,7 +538,7 @@ public class Sender {
                     hasRead += mss;
                     b = new byte[mss];
                 }
-                logger.info("文件读取完毕：{}", fileLength);
+                logger.info("Sender: 文件读取完毕：{} bytes", fileLength);
             } catch (IOException e) {
                 e.printStackTrace();
             }

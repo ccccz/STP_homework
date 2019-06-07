@@ -177,7 +177,7 @@ public class Receiver {
         // 一些初始化操作
         // 创建文件，用于存放从Sender接收到的数据
         File file = new File(filePath);
-        logger.debug("create file to save data:{}", file.getPath());
+        logger.debug("Receiver: Create file to save data:{}", file.getPath());
         if (file.exists()) {
             file.delete();
         }
