@@ -103,14 +103,6 @@ public class Message {
         return m;
     }
 
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    public static int getHeadLength() {
-        return HEAD_LENGTH;
-    }
-
     //TODO yh 检查过时消息
     //TODO hl 可能需要新增一个参数确定是哪个分块
 
@@ -177,6 +169,9 @@ public class Message {
 
         //add CRC to head
 //        logger.debug("{},{},{}",crc16.length,HEAD_LENGTH-CRC_LENGTH,CRC_LENGTH);
+        if (this.crc16 == null) {
+            this.crc16 = new byte[2];
+        }
         System.arraycopy(this.crc16, 0, head, HEAD_LENGTH - CRC_LENGTH, CRC_LENGTH);
 
         // 如果该Message中的content字段为空
@@ -185,6 +180,7 @@ public class Message {
         }
         head = Arrays.copyOf(head, head.length + this.content.length);
         System.arraycopy(this.content, 0, head, HEAD_LENGTH, this.content.length);
+
         return head;
     }
 

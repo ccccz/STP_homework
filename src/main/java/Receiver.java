@@ -11,7 +11,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketAddress;
 import java.net.SocketException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -41,23 +40,22 @@ public class Receiver {
     private String ip;
     private final int port;
     private final int maxDelay;
-
     private int msw;
     private int mss;
-    private int wdSize;
 
+    private int wdSize;
     private ReceiverState receiverState = ReceiverState.CLOSED;
     private static final Logger logger = LoggerFactory.getLogger(Sender.class);
+
     private FileOutputStream fileOutputStream;
     private DatagramSocket datagramSocket;
     private DatagramPacket inDatagramPacket;
     private DatagramPacket outDatagramPacket;
-    private HashMap<Integer, byte[]> window = new HashMap<>();
-    private Message receivedMessage;
+    private volatile HashMap<Integer, byte[]> window = new HashMap<>();
+
     private Message toSendMessage;
     private byte[] toSendPacket;
     private byte[] receiveBuffer;
-    private int maxReceived;
 
     /**
      * 已经写入文件的字节号
@@ -71,11 +69,10 @@ public class Receiver {
      * 将要发送给Sender的acknolegment
      */
     private int toSendAcknowlegment = 0;
-    private int lastSendSequence = 0;
-    private int lastSendAcknowlegment = 0;
-    private WriteFile writeFile;
 
-    private SocketAddress des_address;
+    private WriteFile writeFile;
+    private SocketAddress desAddress;
+
     private final String lock = "";
 
     public static void main(String[] args) {
@@ -86,7 +83,6 @@ public class Receiver {
 
         Receiver receiver = new Receiver(args[0], args[1], Integer.parseInt(args[2]),
                 Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]));
-        receiver.writeFile.start();
         receiver.connect();
     }
 
@@ -99,6 +95,7 @@ public class Receiver {
         this.mss = mss;
         this.msw = msw;
         wdSize = msw / mss;
+        this.receiveBuffer = new byte[mss + Message.HEAD_LENGTH];
         writeFile.setPriority(Thread.MAX_PRIORITY);
     }
 
@@ -116,18 +113,18 @@ public class Receiver {
             while (receiverState != ReceiverState.CLOSED) {
                 if (window.containsKey(byteHasWrite)) {
                     synchronized (lock) {
-                        int length = window.get(byteHasWrite).length;
                         try {
-                            fileOutputStream.write(window.get(byteHasWrite));
-                            logger.debug("已经写入的字节：{}", byteHasWrite);
-                            window.remove(byteHasWrite);
-                            byteHasWrite += length;
+                            while (window.containsKey(byteHasWrite)) {
+                                int length = window.get(byteHasWrite).length;
+                                fileOutputStream.write(window.get(byteHasWrite));
+                                window.remove(byteHasWrite);
+                                byteHasWrite += length;
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                     }
                 }
-
             }
         }
     }
@@ -155,26 +152,28 @@ public class Receiver {
         toSendMessage.setTime((new Date()).getTime());
     }
 
-    private void receiveMessage() {
+    private Message receiveMessage() {
         try {
+            inDatagramPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             datagramSocket.receive(inDatagramPacket);
+            desAddress = inDatagramPacket.getSocketAddress();
+            byte[] receive = inDatagramPacket.getData();
+            Message message = Message.deMessage(receive);
+            logger.warn("msg:{}", message);
+            return message;
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        des_address = inDatagramPacket.getSocketAddress();
-        receiveBuffer = inDatagramPacket.getData();
-        receivedMessage = Message.deMessage(receiveBuffer);
+        return null;
     }
+
 
     /**
      * 建立连接阶段
      */
     private void connect() {
         logger.debug("Receiver run()!");
-
         changeState(ReceiverState.LISTEN);
-
         // 一些初始化操作
         // 创建文件，用于存放从Sender接收到的数据
         File file = new File(filePath);
@@ -192,32 +191,30 @@ public class Receiver {
         } catch (SocketException e) {
             e.printStackTrace();
         }
-
-        byte[] buffer = new byte[mss + Message.HEAD_LENGTH];
-        inDatagramPacket = new DatagramPacket(buffer, buffer.length);
+        inDatagramPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
 
         while (true) {
             // Receiver不停地接收来自Sender发送的“连接阶段”packet
-            receiveMessage();
+            Message msg = receiveMessage();
 
             // 如果收到SYN
-            if (receivedMessage.isSYN() && receiverState == ReceiverState.LISTEN) {
+            if (msg.isSYN() && receiverState == ReceiverState.LISTEN) {
                 logger.debug("Receiver: receive SYN.");
                 changeState(ReceiverState.SYN_RECEIVED);
-                toSendAcknowlegment = receivedMessage.getSequence() + 1;
+                toSendAcknowlegment = msg.getSequence() + 1;
                 setSYNACKMessage();
                 toSendPacket = toSendMessage.enMessage();
 
                 // 发送SYN ACK packet
                 try {
-                    outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, des_address);
+                    outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, desAddress);
                     datagramSocket.send(outDatagramPacket);
                     logger.debug("Receiver: send SYN ACK.");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                lastSendSequence = toSendSequence;
-                lastSendAcknowlegment = toSendAcknowlegment;
+//                lastSendSequence = toSendSequence;
+//                lastSendAcknowlegment = toSendAcknowlegment;
 
                 // 跳出循环
                 break;
@@ -226,10 +223,10 @@ public class Receiver {
 
         // Recevier不停地检查是否收到Sender发送的ACK
         while (true) {
-            receiveMessage();
+            Message msg = receiveMessage();
 
             // 如果收到ACK
-            if (receivedMessage.isACK() && receiverState == ReceiverState.SYN_RECEIVED && receivedMessage.getSequence() == lastSendAcknowlegment && receivedMessage.getAcknolegment() == lastSendSequence + 1) {  // 收到ACK
+            if (msg.isACK() && receiverState == ReceiverState.SYN_RECEIVED) {  // 收到ACK
                 logger.debug("Receiver: receive ACK.");
                 changeState(ReceiverState.ESTABLISHED);
                 toSendAcknowlegment = 0;
@@ -238,63 +235,69 @@ public class Receiver {
         }
 
         // 开始接收data packet
-        (new Thread(new ReceiveThread())).start();
+        writeFile.start();
+        receive();
     }
 
-    class ReceiveThread implements Runnable {
+    public void receive() {
+        int maxReceived = 0;
 
-        @Override
-        public void run() {
-            while (true) {
-                // 接收来自Sender发送的数据
-                receiveMessage();
+        while (true) {
+            // 接收来自Sender发送的数据
+            Message msg = receiveMessage();
 
-                if (receivedMessage.isFIN()) {
-                    // 如果是连接终止请求
-                    try {
-                        logger.debug("收到中止包");
-                        changeState(ReceiverState.CLOSED);
-                        toSendPacket = receivedMessage.enMessage();
-                        outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, des_address);
-                        // 将FIN packet发送回Sender
-                        datagramSocket.send(outDatagramPacket);
-                        writeFile.interrupt();
-                        datagramSocket.close();
-                        fileOutputStream.close();
-                        break;
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        break;
+            if (msg.isFIN()) {
+                // 如果是连接终止请求
+                try {
+                    logger.debug("收到中止包");
+                    changeState(ReceiverState.CLOSED);
+                    toSendPacket = msg.enMessage();
+                    outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, desAddress);
+                    // 将FIN packet发送回Sender
+                    datagramSocket.send(outDatagramPacket);
+                    writeFile.interrupt();
+                    datagramSocket.close();
+                    fileOutputStream.close();
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    break;
+                }
+            } else if (receiverState == ReceiverState.ESTABLISHED) {
+                // 如果收到data packet
+                logger.info("收到包:{}", msg.getSequence());
+
+                if (window.size() < wdSize) {
+                    if (msg.getSequence() > maxReceived) {
+                        maxReceived = msg.getSequence();
                     }
-                } else if (receiverState == ReceiverState.ESTABLISHED) {
-                    // 如果收到data packet
-                    logger.info("收到包:{}", receivedMessage.getSequence());
-                    if (receivedMessage.getSequence() > maxReceived) {
-                        maxReceived = receivedMessage.getSequence();
-                    }
-
-                    if (window.size() < wdSize + 1) {
-                        synchronized (lock) {
-                            if (receivedMessage.getSequence() >= byteHasWrite) {
-                                window.put(receivedMessage.getSequence(), receivedMessage.getContent());
-                                // 将要发送给Sender的acknolegment，暂时先定为已经写入文件的字节数
-                            }
+                    synchronized (lock) {
+                        if (msg.getSequence() >= byteHasWrite) {
+                            window.put(msg.getSequence(), msg.getContent());
+                            toSendAcknowlegment = msg.getSequence() + msg.getContentLength();
+                        } else {
+                            toSendAcknowlegment = byteHasWrite;
                         }
                     }
-                    toSendAcknowlegment = byteHasWrite;
-                    setACKMessage();
-                    toSendPacket = toSendMessage.enMessage();
-                    // 发送ACK packet
-                    try {
-                        outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, des_address);
-                        datagramSocket.send(outDatagramPacket);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                } else {
+                    if (!window.containsKey(byteHasWrite)) {
+                        logger.error("?????");
+                        System.exit(-1);
                     }
-                    logger.info("发送确认号:{}", toSendAcknowlegment);
                 }
-                toSendSequence++;
+                setACKMessage();
+                toSendPacket = toSendMessage.enMessage();
+                // 发送ACK packet
+                try {
+                    outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, desAddress);
+                    datagramSocket.send(outDatagramPacket);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                logger.info("发送确认号:{}", toSendAcknowlegment);
             }
+            toSendSequence++;
         }
     }
+
 }
