@@ -186,9 +186,9 @@ public class Message {
 	}
 
 	void setContent(byte[] content) {
-//		if (content == null) {
-//			content = new byte[]{};
-//		}
+		if (content == null) {
+			content = new byte[]{};
+		}
 		this.contentLength = (short) content.length;
 		this.content = content;
 		this.crc16 = CRC16.generateCRC(content);

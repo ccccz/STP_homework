@@ -409,6 +409,10 @@ public class Receiver{
                 }
             } else if (receiverState == ReceiverState.ESTABLISHED) {  // 如果收到data packet
                 logger.debug("receive data packet, Sequence:{}",receivedMessage.getSequence());
+                // 如果收到空报文
+                if (receivedMessage.getContentLength() == 0) {
+                    return;
+                }
                 window.put(receivedMessage.getSequence(), receivedMessage.getContent());
 
                 // 将要发送给Sender的acknolegment，暂时先定为已经写入文件的字节数

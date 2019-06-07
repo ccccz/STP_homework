@@ -611,6 +611,9 @@ public class Sender {
 		private void sendMessageBySequence(int sequence) {
 			try {
 				int dataLength = sequence + mss <= right ? mss : right - sequence;
+				if (dataLength == 0) {
+					return;
+				}
 				toSendData = new byte[dataLength];
 				bufferedInputStream.read(toSendData, 0, dataLength);
 				if (toSendData == null || toSendData.length == 0) {
@@ -665,6 +668,7 @@ public class Sender {
 //			logger.debug("retransmit sequence:{}", sequence);
 			setDataMessage();
 			sendMessage();
+			logger.info("快速重传：字节序号{},数据长度:{}", retransmitSequence,toSendData.length);
 //			logger.info("已经重新发送sequence：{},toSendData:{}", sequence,toSendData);
 		}
 
@@ -699,7 +703,6 @@ public class Sender {
 
 				// 根据指定的序列号重传数据
 				if (isNeedRetransmit) {
-					logger.info("快速重传：字节序号{}", retransmitSequence);
 					retransmit(retransmitSequence);
 					isNeedRetransmit = false;
 					duplicateACK = 1;
