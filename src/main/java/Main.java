@@ -14,7 +14,7 @@ public class Main {
         })).start();
         Thread.sleep(1000);
         (new Thread(() -> {
-            Sender.main(new String[]{"file.txt", "127.0.0.1", "6666", "0.2", "1077", "1000", "0", "5678", "100", "1000", "15"});
+            Sender.main(new String[]{"file.txt", "127.0.0.1", "6666", "0.2", "1077", "1000", "0.2", "5678", "100", "1000", "15"});
         })).start();
     }
 

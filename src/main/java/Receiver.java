@@ -77,7 +77,7 @@ public class Receiver {
 
     public static void main(String[] args) {
         if (args.length != 6) {
-            System.out.println("参数数量不足，请重新启动程序");
+            System.out.println("Receiver: 参数数量不足，请重新启动程序");
             return;
         }
 
@@ -104,7 +104,7 @@ public class Receiver {
      */
     private void changeState(ReceiverState s) {
         this.receiverState = s;
-        logger.info("服务端状态改变为{}", s);
+        logger.info("Receiver: 服务端状态改变为{}", s);
     }
 
     class WriteFile extends Thread {
@@ -159,7 +159,7 @@ public class Receiver {
             desAddress = inDatagramPacket.getSocketAddress();
             byte[] receive = inDatagramPacket.getData();
             Message message = Message.deMessage(receive);
-            logger.warn("接受：msg:{}", message.getSequence());
+            logger.warn("Receiver: 接受msg:{}", message.getSequence());
             return message;
         } catch (IOException e) {
             e.printStackTrace();
@@ -249,7 +249,7 @@ public class Receiver {
             if (msg.isFIN()) {
                 // 如果是连接终止请求
                 try {
-                    logger.debug("收到中止包");
+                    logger.debug("Receiver: 收到中止包");
                     changeState(ReceiverState.CLOSED);
                     toSendPacket = msg.enMessage();
                     outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, desAddress);
@@ -265,7 +265,7 @@ public class Receiver {
                 }
             } else if (receiverState == ReceiverState.ESTABLISHED) {
                 // 如果收到data packet
-                logger.info("收到包:{}", msg.getSequence());
+                logger.info("Receiver: 收到包:{}", msg.getSequence());
 
                 if (window.size() < wdSize) {
                     if (msg.getSequence() > maxReceived) {
@@ -294,7 +294,7 @@ public class Receiver {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                logger.info("发送确认号:{}", toSendAcknowlegment);
+                logger.info("Receiver: 发送确认号:{}", toSendAcknowlegment);
             }
             toSendSequence++;
         }

@@ -324,6 +324,9 @@ public class Sender {
                 logger.debug("Sender: 发送了SYN.");
                 if (senderState != SenderState.SYN_SENT) {
                     changeState(SenderState.SYN_SENT);
+                }else{
+                    changeState(SenderState.ESTABLISHED);
+                    //logger.error("Maybe loss SYN ACK");
                 }
                 try {
                     synchronized (locks) {
