@@ -1,5 +1,3 @@
-import lombok.Data;
-import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,15 +30,12 @@ enum ReceiverState {
  * @author DW
  * @date 2019/5/22
  */
-@Data
 public class Receiver {
-    @NonNull
     private String filePath;
-    @NonNull
     private String ip;
     private final int port;
     private final int maxDelay;
-    private int msw;
+    private int mws;
     private int mss;
 
     private int wdSize;
@@ -68,7 +63,7 @@ public class Receiver {
     /**
      * 将要发送给Sender的acknolegment
      */
-    private int toSendAcknowlegment = 0;
+    private int toSendAcknowledgement = 0;
 
     private WriteFile writeFile;
     private SocketAddress desAddress;
@@ -76,25 +71,21 @@ public class Receiver {
     private final String lock = "";
 
     public static void main(String[] args) {
-        if (args.length != 6) {
+        if (args.length != 8) {
             System.out.println("参数数量不足，请重新启动程序");
             return;
         }
 
-        Receiver receiver = new Receiver(args[0], args[1], Integer.parseInt(args[2]),
-                Integer.parseInt(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+        Receiver receiver = new Receiver(args[0], args[1], Integer.parseInt(args[2]), Integer.parseInt(args[5]));
         receiver.connect();
     }
 
-    private Receiver(@NonNull String filePath, @NonNull String ip, int port, int maxDelay, int mss, int msw) {
+    private Receiver(String filePath, String ip, int port, int maxDelay) {
         this.filePath = filePath;
         this.ip = ip;
         this.port = port;
         this.maxDelay = maxDelay;
         this.writeFile = new WriteFile();
-        this.mss = mss;
-        this.msw = msw;
-        wdSize = msw / mss;
         this.receiveBuffer = new byte[mss + Message.HEAD_LENGTH];
         writeFile.setPriority(Thread.MAX_PRIORITY);
     }
@@ -117,6 +108,7 @@ public class Receiver {
                             while (window.containsKey(byteHasWrite)) {
                                 int length = window.get(byteHasWrite).length;
                                 fileOutputStream.write(window.get(byteHasWrite));
+                                logger.trace("文件块写入：{}",byteHasWrite);
                                 window.remove(byteHasWrite);
                                 byteHasWrite += length;
                             }
@@ -136,7 +128,7 @@ public class Receiver {
     private void setACKMessage() {
         toSendMessage = new Message();
         toSendMessage.setACK(true);
-        toSendMessage.setAcknolegment(toSendAcknowlegment);
+        toSendMessage.setAcknolegment(toSendAcknowledgement);
         toSendMessage.setSequence(toSendSequence);
         toSendMessage.setContent(new byte[]{});
         toSendMessage.setTime((new Date()).getTime());
@@ -146,7 +138,7 @@ public class Receiver {
         toSendMessage = new Message();
         toSendMessage.setSYN(true);
         toSendMessage.setACK(true);
-        toSendMessage.setAcknolegment(toSendAcknowlegment);
+        toSendMessage.setAcknolegment(toSendAcknowledgement);
         toSendMessage.setSequence(toSendSequence);
         toSendMessage.setContent(new byte[]{});
         toSendMessage.setTime((new Date()).getTime());
@@ -159,7 +151,6 @@ public class Receiver {
             desAddress = inDatagramPacket.getSocketAddress();
             byte[] receive = inDatagramPacket.getData();
             Message message = Message.deMessage(receive);
-            logger.warn("接受：msg:{}", message.getSequence());
             return message;
         } catch (IOException e) {
             e.printStackTrace();
@@ -200,8 +191,12 @@ public class Receiver {
             // 如果收到SYN
             if (msg.isSYN() && receiverState == ReceiverState.LISTEN) {
                 logger.debug("Receiver: receive SYN.");
+                mss = msg.getMss();
+                mws = msg.getWindow();
+                wdSize = mws / mss;
+                this.receiveBuffer = new byte[mss + Message.HEAD_LENGTH];
                 changeState(ReceiverState.SYN_RECEIVED);
-                toSendAcknowlegment = msg.getSequence() + 1;
+                toSendAcknowledgement = msg.getSequence() + 1;
                 setSYNACKMessage();
                 toSendPacket = toSendMessage.enMessage();
 
@@ -213,10 +208,7 @@ public class Receiver {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-//                lastSendSequence = toSendSequence;
-//                lastSendAcknowlegment = toSendAcknowlegment;
 
-                // 跳出循环
                 break;
             }
         }
@@ -228,7 +220,7 @@ public class Receiver {
             if (msg.isACK() && receiverState == ReceiverState.SYN_RECEIVED) {  // 收到ACK
                 logger.debug("Receiver: receive ACK.");
                 changeState(ReceiverState.ESTABLISHED);
-                toSendAcknowlegment = 0;
+                toSendAcknowledgement = 0;
                 break;
             }
         }
@@ -255,7 +247,7 @@ public class Receiver {
             } else if (msg.isFIN()) {
                 // 如果是连接终止请求
                 try {
-                    logger.debug("收到中止包");
+                    logger.warn("收到中止包");
                     changeState(ReceiverState.CLOSED);
                     toSendPacket = msg.enMessage();
                     outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, desAddress);
@@ -280,9 +272,9 @@ public class Receiver {
                     synchronized (lock) {
                         if (msg.getSequence() >= byteHasWrite) {
                             window.put(msg.getSequence(), msg.getContent());
-                            toSendAcknowlegment = msg.getSequence() + msg.getContentLength();
+                            toSendAcknowledgement = msg.getSequence() + msg.getContentLength();
                         } else {
-                            toSendAcknowlegment = byteHasWrite;
+                            toSendAcknowledgement = byteHasWrite;
                         }
                     }
                 } else {
@@ -300,7 +292,7 @@ public class Receiver {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                logger.info("发送确认号:{}", toSendAcknowlegment);
+                logger.info("发送确认号:{}", toSendAcknowledgement);
             }
             toSendSequence++;
         }

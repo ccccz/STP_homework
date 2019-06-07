@@ -1,4 +1,3 @@
-import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +8,6 @@ import java.util.Arrays;
  * @date 2019/5/22
  */
 
-@Data
 public class Message {
     public static final int CRC_LENGTH = 2;
     public static final int HEAD_LENGTH = 29;
@@ -102,9 +100,6 @@ public class Message {
 
         return m;
     }
-
-    //TODO yh 检查过时消息
-    //TODO hl 可能需要新增一个参数确定是哪个分块
 
     public static int getCLEAN() {
         return CLEAN;
