@@ -1,1 +1,10 @@
 /target
+/.vscode/
+/.settings/
+/classes/
+/debug.log
+/.classpath
+/file.txt
+/receive.txt
+/.project
+/.idea
