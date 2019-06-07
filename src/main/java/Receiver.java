@@ -159,7 +159,7 @@ public class Receiver {
             desAddress = inDatagramPacket.getSocketAddress();
             byte[] receive = inDatagramPacket.getData();
             Message message = Message.deMessage(receive);
-            logger.warn("msg:{}", message);
+            logger.warn("接受：msg:{}", message.getSequence());
             return message;
         } catch (IOException e) {
             e.printStackTrace();
