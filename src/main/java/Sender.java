@@ -187,7 +187,6 @@ public class Sender {
                 Double.parseDouble(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]),
                 Double.parseDouble(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8]),
                 Integer.parseInt(args[9]), Integer.parseInt(args[10]));
-        System.out.println(sender);
         sender.readFile.start();
         sender.accept.start();
         sender.connect.start();
@@ -266,8 +265,7 @@ public class Sender {
      * @return true：丢包，false：不丢包
      */
     private boolean getDrop() {
-        boolean b = (pDrop > 0) && randomDrop.nextDouble() < pDrop;
-        return b;
+        return (pDrop > 0) && randomDrop.nextDouble() < pDrop;
     }
 
     /**

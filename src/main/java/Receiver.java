@@ -224,7 +224,6 @@ public class Receiver {
         // Recevier不停地检查是否收到Sender发送的ACK
         while (true) {
             Message msg = receiveMessage();
-
             // 如果收到ACK
             if (msg.isACK() && receiverState == ReceiverState.SYN_RECEIVED) {  // 收到ACK
                 logger.debug("Receiver: receive ACK.");
@@ -245,8 +244,15 @@ public class Receiver {
         while (true) {
             // 接收来自Sender发送的数据
             Message msg = receiveMessage();
-
-            if (msg.isFIN()) {
+            if (msg.isSYN() && msg.isACK()) {
+                outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, desAddress);
+                try {
+                    datagramSocket.send(outDatagramPacket);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                continue;
+            } else if (msg.isFIN()) {
                 // 如果是连接终止请求
                 try {
                     logger.debug("收到中止包");
