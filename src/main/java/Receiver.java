@@ -408,7 +408,7 @@ public class Receiver{
                     e.printStackTrace();
                 }
             } else if (receiverState == ReceiverState.ESTABLISHED) {  // 如果收到data packet
-//                logger.debug("Receiver: receive data packet.");
+                logger.debug("receive data packet, Sequence:{}",receivedMessage.getSequence());
                 window.put(receivedMessage.getSequence(), receivedMessage.getContent());
 
                 // 将要发送给Sender的acknolegment，暂时先定为已经写入文件的字节数
@@ -419,7 +419,6 @@ public class Receiver{
                     // 如果在接收窗口中，没有Receiver期望接收到的sequence，就不必更改toSendAcknolegment
                     // 如果在接收窗口中，已经有了Receiver期望接收到的sequence，就更改toSendAcknolegment，增加该包中数据的长度到toSendAcknolegment中
                     toSendAcknowlegment += window.get(toSendAcknowlegment).length;
-                    logger.info("toSendAckno++ {}",toSendAcknowlegment);
                 }
 
                 setACKMessage();
@@ -428,14 +427,13 @@ public class Receiver{
                 try {
                     outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length, des_address);
                     datagramSocket.send(outDatagramPacket);
-                    logger.error("send ACK:{}",toSendAcknowlegment);
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                logger.info("send ACK:{}",toSendAcknowlegment);
 
                 // 将按顺序到达的data写入文件
-                logger.error("window:{},byteHasWrite:{}",window,byteHasWrite);
+//                logger.error("window:{},byteHasWrite:{}",window,byteHasWrite);
                 while (window.containsKey(byteHasWrite)) {
                     int length = window.get(byteHasWrite).length;
                     writeIntoFile(window.get(byteHasWrite));

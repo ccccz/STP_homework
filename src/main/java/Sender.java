@@ -97,6 +97,7 @@ public class Sender {
 
 	private boolean isNeedRetransmit;  // 是否需要快速重传
 	private int retransmitSequence;  // 需要快速重传的数据的第一个字节号
+	private int duplicateACK = 1;  // 记录重复收到的ACK数量
 
 
 	public static void main(@NotNull String[] args) {
@@ -331,7 +332,7 @@ public class Sender {
 	private boolean getDrop() {
 //		boolean b = false;
 		boolean b = (pDrop > 0) && randomDrop.nextDouble() < pDrop;
-		logger.debug("本次丢包情况:{}", b ? "丢包" : "不丢包");
+		logger.info("本次丢包情况:{}", b ? "丢包" : "不丢包");
 		return b;
 	}
 
@@ -509,14 +510,9 @@ public class Sender {
 		public void run() {
 			logger.debug("Accept run()!");
 
-			int duplicateACK = 1;  // 记录重复收到的ACK数量
-
 			while (true) {
-//				logger.error("==================");
 				// 接收Receiver发送的数据
 				receiveMessage();
-
-//				logger.info("Sender: senderState--{}", senderState);
 
 				// 如果Sender接收到的packet是SYN ACK packet，那么就改变Sender状态为SYN_ACK
 				if (receivedMessage.isSYNACK() && senderState == SenderState.SYN_SENT && receivedMessage.getAcknolegment() == seqNum) {
@@ -524,13 +520,28 @@ public class Sender {
 					changeState(SenderState.ESTABLISHED);
 					// todo:改变状态，唤醒
 				} else if (receivedMessage.isACK() && senderState == SenderState.ESTABLISHED) {
+					// 如果收到重复的ACK
+					if (receivedMessage.getAcknolegment() == byteHasAcked) {
+						duplicateACK++;
+						logger.info("receive duplicate ACK{}，byteHasAcked：{}.",
+								duplicateACK,byteHasAcked);
+					}
+					if (duplicateACK >= 3 && receivedMessage.getAcknolegment() < fileLength) {
+						/*
+						 * 快速重传机制：基于接收端的反馈信息（ACK）来引发重传,而非重传计时器的超时。不以时间驱动，而以数据驱动重传。也就是说，如果，包没有连续到达，就ack
+						 * 最后那个可能被丢了的包，如果发送方连续收到3次相同的ack，就重传。Fast Retransmit的好处是不用等timeout了再重传。
+						 */
+						// TODO: 2019-06-03
+						// 重传packet
+						isNeedRetransmit = true;
+						retransmitSequence = receivedMessage.getAcknolegment();
+					}
 					// 如果Sender接收到的packet是ACK packet
 					// 如果收到的来自Receiver的acknolegment比Sender所记录的已经确认收到的ACK字节号大，说明Sender发送的数据都已经收到了
 //					logger.debug("Sender: receive ACK. byteHasAcked:{}, receivedMessage.getAcknolegment():{}",
 //							byteHasAcked,receivedMessage.getAcknolegment());
 					if (byteHasAcked < receivedMessage.getAcknolegment()) {
 						byteHasAcked = receivedMessage.getAcknolegment();  // 更新已经确认的ACK号
-						logger.debug("update byteHasAcked:{}", byteHasAcked);
 						// 移动滑动窗口的左侧
 						left = receivedMessage.getAcknolegment();
 						duplicateACK = 1;
@@ -540,21 +551,7 @@ public class Sender {
 						} else {
 							right = left + fileLength - left;
 						}
-						logger.debug("left:{},right:{},byteHasSent:{}", left, right, byteHasSent);
-					}
-				} else if (receivedMessage.getAcknolegment() == byteHasAcked) {  // 收到重复的ACK Num确认号
-					duplicateACK++;
-					logger.debug("Sender: receive duplicate ACK{}.", duplicateACK);
-					if (duplicateACK >= 3 && receivedMessage.getAcknolegment() < fileLength) {
-						// 快速重传：
-						/*
-						 * 快速重传机制：基于接收端的反馈信息（ACK）来引发重传,而非重传计时器的超时。不以时间驱动，而以数据驱动重传。也就是说，如果，包没有连续到达，就ack
-						 * 最后那个可能被丢了的包，如果发送方连续收到3次相同的ack，就重传。Fast Retransmit的好处是不用等timeout了再重传。
-						 */
-						// TODO: 2019-06-03
-						// 重传packet
-						isNeedRetransmit = true;
-						retransmitSequence = receivedMessage.getAcknolegment();
+						logger.info("left:{},right:{},byteHasSent:{}", left, right, byteHasSent);
 					}
 				} else if (receivedMessage.isFIN()) {
 					logger.debug("Sender: receive FIN.");
@@ -579,15 +576,7 @@ public class Sender {
 		private byte[] toSendData;
 		ScheduledThreadPoolExecutor scheduled = new ScheduledThreadPoolExecutor(mws);
 		HashMap<Integer, Timer> timerHashMap = new HashMap<>();  // 存储各个包的Timer
-		//		TimerTask timerTask = new TimerTask() {
-//			@Override
-//			public void run() {
-//				logger.debug("===============================");
-////				for (int i = byteHasAcked; i <= right; i++) {
-////					retransmit(i);
-////				}
-//			}
-//		};
+
 		TimerTask timerTask;
 
 		private Timer timer;
@@ -624,6 +613,9 @@ public class Sender {
 				int dataLength = sequence + mss <= right ? mss : right - sequence;
 				toSendData = new byte[dataLength];
 				bufferedInputStream.read(toSendData, 0, dataLength);
+				if (toSendData == null || toSendData.length == 0) {
+					return;
+				}
 				toSendSequence = sequence;
 				setDataMessage();
 				// 发送data packet
@@ -633,18 +625,32 @@ public class Sender {
 
 				timer = new Timer();
 				timerHashMap.put(sequence, timer);  // 保存当前包的Timer
+				timerTask = new TimerTask() {
+					@Override
+					public void run() {
+//						logger.debug("sequence:{},byteHasAcked:{}，byteHasSend:{},left:{},right:{}",sequence,
+//								byteHasAcked,
+//								byteHasSent,left,right);
+						if (sequence >= byteHasAcked) {
+//							logger.error("===========sequence:{},byteHasAcked:{}," +
+//											"byteHasSend:{},left:{},right:{}，timerHashMap:{}===========",
+//									sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
+							retransmit(sequence);
+						}
+//						timerHashMap.keySet().forEach(
+//								key->{
+//									retransmit(key);
+//								}
+//						);
+//						if (sequence < left) {
+//							timerHashMap.get(sequence).cancel();
+//							timerHashMap.remove(sequence);
+//						}
+//						logger.debug("==========timerHashMap:{}",timerHashMap);
+					}
+				};
+				timer.schedule(timerTask, initalTimeout, initalTimeout);
 
-				if (sequence <= byteHasAcked) {
-					logger.info("===========sequence:{},byteHasAcked:{}," +
-									"byteHasSend:{},left:{},right:{}，timerHashMap:{}===========",
-							sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
-					retransmit(sequence);
-				}
-				try {
-					sleep(maxDelay);
-				} catch (InterruptedException i) {
-					i.printStackTrace();
-				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -653,10 +659,13 @@ public class Sender {
 		private void retransmit(int sequence) {
 			toSendSequence = sequence;
 			toSendData = hasSentButNotAcked.get(sequence);
+			if (toSendData == null||toSendData.length==0) {
+				return;
+			}
 //			logger.debug("retransmit sequence:{}", sequence);
 			setDataMessage();
 			sendMessage();
-			logger.debug("===========================已经重新发送sequence：{}", sequence);
+//			logger.info("已经重新发送sequence：{},toSendData:{}", sequence,toSendData);
 		}
 
 		private void setFINMessage() {
@@ -679,21 +688,22 @@ public class Sender {
 				}
 				// 将byteHasSent-right段的数据全部发送出去
 				// TODO: 2019-06-06 我发现一件很奇怪的事情：下面的这一行如果没有的话，程序就会出错。qiao，为什么？！
-			//	logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
+				logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
 
 				if (byteHasSent < right) {
 					sendMessageBySequence(byteHasSent);
 					logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
 				}
-//				do {
-//					sendMessageBySequence(byteHasSent);
-//				} while (byteHasSent < right);
+
+//				logger.info("duplicateACK:{},bytehasAck:{}",duplicateACK,byteHasAcked);
 
 				// 根据指定的序列号重传数据
-//				if (isNeedRetransmit) {
-//					logger.info("快速重传：字节序号{}", retransmitSequence);
-//					retransmit(retransmitSequence);
-//				}
+				if (isNeedRetransmit) {
+					logger.info("快速重传：字节序号{}", retransmitSequence);
+					retransmit(retransmitSequence);
+					isNeedRetransmit = false;
+					duplicateACK = 1;
+				}
 			}
 		}
 	}

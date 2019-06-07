@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bd858dfe-e52b-44d1-b656-61cf8903ec5c" name="Default Changelist" comment="无能为力版">
+    <list default="true" id="bd858dfe-e52b-44d1-b656-61cf8903ec5c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CRC16.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CRC16.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Message.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Receiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Receiver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ReceiverState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ReceiverState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Accept.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender$Accept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Connect.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender$Connect.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Sender$Transfer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender$Transfer$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Sender$Transfer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender$Transfer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/SenderState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SenderState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,16 +33,20 @@
     <favorites_list name="test" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43367347">
+    <splitter split-orientation="horizontal" split-proportion="0.5617334">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152">
-                  <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+                <state relative-caret-position="213">
+                  <caret line="642" column="33" lean-forward="true" selection-start-line="642" selection-start-column="33" selection-end-line="642" selection-end-column="33" />
                   <folding>
-                    <element signature="e#18592#20012#0" expanded="true" />
+                    <element signature="e#4824#5454#0" expanded="true" />
+                    <element signature="e#14804#16961#0" expanded="true" />
+                    <element signature="e#17852#18199#0" expanded="true" />
+                    <element signature="e#19645#19982#0" expanded="true" />
+                    <element signature="e#20228#21139#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -47,20 +55,32 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1501">
-                  <caret line="182" selection-start-line="182" selection-end-line="182" />
+                <state relative-caret-position="397">
+                  <caret line="134" selection-start-line="134" selection-end-line="134" />
                   <folding>
-                    <element signature="e#3836#5776#0" expanded="true" />
+                    <element signature="e#5269#5483#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="152">
+                  <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+                  <folding>
+                    <element signature="method#generateCRC#0;class#CRC16#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="242">
-                  <caret line="423" column="24" selection-start-line="423" selection-start-column="24" selection-end-line="423" selection-end-column="24" />
+                <state relative-caret-position="159">
+                  <caret line="419" column="111" lean-forward="true" selection-start-line="419" selection-start-column="111" selection-end-line="419" selection-end-column="111" />
                   <folding>
                     <element signature="e#3262#3412#0" expanded="true" />
                     <element signature="e#6578#7332#0" expanded="true" />
@@ -77,11 +97,11 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="130">
-                  <caret line="218" column="5" lean-forward="true" selection-start-line="218" selection-start-column="5" selection-end-line="218" selection-end-column="5" />
+                <state relative-caret-position="220">
+                  <caret line="173" column="65" selection-start-line="173" selection-start-column="19" selection-end-line="173" selection-end-column="65" />
                   <folding>
                     <element signature="e#3262#3412#0" expanded="true" />
                     <element signature="e#6578#7332#0" expanded="true" />
@@ -94,24 +114,32 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="488">
-                  <caret line="698" column="14" selection-start-line="698" selection-start-column="14" selection-end-line="698" selection-end-column="14" />
+                <state relative-caret-position="215">
+                  <caret line="366" column="2" lean-forward="true" selection-start-line="366" selection-start-column="2" selection-end-line="366" selection-end-column="2" />
                   <folding>
-                    <element signature="e#14757#17108#0" expanded="true" />
-                    <element signature="e#18592#20012#0" expanded="true" />
+                    <element signature="e#2380#3272#0" expanded="true" />
+                    <element signature="e#3275#3969#0" expanded="true" />
+                    <element signature="e#4824#5454#0" expanded="true" />
+                    <element signature="e#5457#5799#0" expanded="true" />
+                    <element signature="e#5802#5924#0" expanded="true" />
+                    <element signature="e#5927#6151#0" expanded="true" />
+                    <element signature="e#9547#9760#0" expanded="true" />
+                    <element signature="e#9763#9976#0" expanded="true" />
+                    <element signature="e#12450#13750#0" expanded="true" />
+                    <element signature="e#13754#14244#0" expanded="true" />
+                    <element signature="e#14248#14747#0" expanded="true" />
+                    <element signature="e#14804#16961#0" expanded="true" />
+                    <element signature="e#17328#17848#0" expanded="true" />
+                    <element signature="e#17852#18199#0" expanded="true" />
+                    <element signature="e#18203#19641#0" expanded="true" />
+                    <element signature="e#18707#19515#0" expanded="true" />
+                    <element signature="e#19514#19515#0" expanded="true" />
+                    <element signature="e#19645#19982#0" expanded="true" />
+                    <element signature="e#19986#20224#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="19">
-                  <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
                 </state>
               </provider>
             </entry>
@@ -139,17 +167,20 @@
       <find>writeInto</find>
       <find>writeIn</find>
       <find>hasSentButNotAcked</find>
-      <find>isDrop</find>
       <find>receive</find>
       <find>receiveMess</find>
       <find>duplica</find>
-      <find>retrans</find>
       <find>getDrop</find>
       <find>setRan</find>
       <find>296</find>
       <find>sequence：</find>
       <find>send</find>
       <find>right</find>
+      <find>接收</find>
+      <find>isDrop</find>
+      <find>retrans</find>
+      <find>timerTask</find>
+      <find>setData</find>
     </findStrings>
     <replaceStrings>
       <replace>CLEAN</replace>
@@ -169,11 +200,11 @@
         <option value="$USER_HOME$/.m2/settings.xml" />
         <option value="$PROJECT_DIR$/debug.log" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
-        <option value="$PROJECT_DIR$/file.txt" />
         <option value="$PROJECT_DIR$/.ignore" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
+        <option value="$PROJECT_DIR$/file.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
         <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
       </list>
     </option>
@@ -186,9 +217,10 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="y" value="23" />
+    <option name="width" value="939" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -283,7 +315,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Receiver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Receiver" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Receiver" />
       <module name="test" />
       <option name="PROGRAM_PARAMETERS" value="receive.txt 127.0.0.1 6666 0.2 1234 200 0.1 5678" />
@@ -294,7 +326,7 @@
     <configuration name="Sender" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Sender" />
       <module name="test" />
-      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 6666 0.2 1077 200 0.1 5678 8 32 500" />
+      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 6666 0.3 1077 200 0.1 5678 8 32 500" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -304,11 +336,6 @@
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Receiver" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Receiver" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -355,7 +382,13 @@
       <workItem from="1559736422866" duration="7202000" />
       <workItem from="1559789844525" duration="3762000" />
       <workItem from="1559800617492" duration="4120000" />
-      <workItem from="1559804838945" duration="2010000" />
+      <workItem from="1559804838945" duration="2364000" />
+      <workItem from="1559825710812" duration="102000" />
+      <workItem from="1559826445219" duration="2089000" />
+      <workItem from="1559838331650" duration="329000" />
+      <workItem from="1559863464995" duration="2576000" />
+      <workItem from="1559866129484" duration="298000" />
+      <workItem from="1559872851004" duration="1013000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <created>1559617030852</created>
@@ -406,11 +439,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559805418409</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="无能为力第二版">
+      <created>1559807169767</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1559807169767</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142411000" />
+    <option name="totallyTimeSpent" value="149172000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -425,7 +465,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15379113" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12517883" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -436,7 +476,7 @@
       <window_info id="DB Browser" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3278496" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" weight="0.37250292" />
+      <window_info anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" weight="0.4559342" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.36192715" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -474,7 +514,7 @@
       <window_info anchor="right" id="Theme Preview" order="11" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11731044" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1223176" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -485,7 +525,7 @@
       <window_info id="DB Browser" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3278496" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" weight="0.27497062" />
+      <window_info active="true" anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" visible="true" weight="0.50293773" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.36192715" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -494,13 +534,13 @@
       <window_info anchor="bottom" id="MyBatis Sql Log" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.54031116" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50363785" side_tool="true" weight="0.5840188" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5028612" side_tool="true" weight="0.32549942" />
       <window_info anchor="bottom" id="Run with VisualVM" order="12" weight="0.40876946" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" />
       <window_info anchor="bottom" id="JRebel Executor" order="15" />
       <window_info anchor="bottom" id="JRebel Console" order="16" side_tool="true" weight="0.32956153" />
-      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.4987874" weight="0.32549942" />
+      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.49713877" weight="0.32549942" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="18" weight="0.19094767" />
       <window_info anchor="bottom" id="Tail" order="19" />
       <window_info anchor="bottom" id="SonarLint" order="20" />
@@ -531,20 +571,21 @@
     <MESSAGE value="edit" />
     <MESSAGE value="修改Receiver结构" />
     <MESSAGE value="无能为力版" />
-    <option name="LAST_COMMIT_MESSAGE" value="无能为力版" />
+    <MESSAGE value="无能为力第二版" />
+    <option name="LAST_COMMIT_MESSAGE" value="无能为力第二版" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Sender.java</url>
-          <line>700</line>
+          <line>681</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Sender.java</url>
-          <line>542</line>
+          <line>553</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -625,27 +666,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.26/slf4j-log4j12-1.7.26-sources.jar!/org/slf4j/impl/Log4jLoggerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7486">
           <caret line="538" selection-start-line="538" selection-end-line="538" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1501">
-          <caret line="182" selection-start-line="182" selection-end-line="182" />
-          <folding>
-            <element signature="e#3836#5776#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,16 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/file.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/receive.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -673,20 +687,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+    <entry file="file://$PROJECT_DIR$/file.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
           <folding>
-            <element signature="e#18592#20012#0" expanded="true" />
+            <element signature="method#generateCRC#0;class#CRC16#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
+          <folding>
+            <element signature="e#5269#5483#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="423" column="24" selection-start-line="423" selection-start-column="24" selection-end-line="423" selection-end-column="24" />
+        <state relative-caret-position="159">
+          <caret line="419" column="111" lean-forward="true" selection-start-line="419" selection-start-column="111" selection-end-line="419" selection-end-column="111" />
           <folding>
             <element signature="e#3262#3412#0" expanded="true" />
             <element signature="e#6578#7332#0" expanded="true" />
@@ -694,6 +721,23 @@
             <element signature="e#7662#8076#0" expanded="true" />
             <element signature="e#8082#8446#0" expanded="true" />
             <element signature="class#ReceiverState#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/receive.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="642" column="33" lean-forward="true" selection-start-line="642" selection-start-column="33" selection-end-line="642" selection-end-column="33" />
+          <folding>
+            <element signature="e#4824#5454#0" expanded="true" />
+            <element signature="e#14804#16961#0" expanded="true" />
+            <element signature="e#17852#18199#0" expanded="true" />
+            <element signature="e#19645#19982#0" expanded="true" />
+            <element signature="e#20228#21139#0" expanded="true" />
           </folding>
         </state>
       </provider>
