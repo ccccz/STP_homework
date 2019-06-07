@@ -84,6 +84,10 @@ public class Sender {
      * 读文件线程
      */
     private ReadFile readFile;
+    /**
+     * 清除窗口已经确认的块列表
+     */
+    private CleanList cleanList;
 
     /**
      * 请求连接报文中的seq值,一次使用
@@ -108,7 +112,7 @@ public class Sender {
     /**
      * 最后一个数据包的分段大小
      */
-    private int part = -1;
+    private volatile int part = -1;
 
     /**
      * 滑动窗口的左侧
@@ -168,6 +172,8 @@ public class Sender {
             datagramSocket = new DatagramSocket();
         } catch (SocketException e) {
             e.printStackTrace();
+            logger.error("初始化:socket故障");
+            System.exit(-1);
         }
     }
 
@@ -181,10 +187,10 @@ public class Sender {
                 Double.parseDouble(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]),
                 Double.parseDouble(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8]),
                 Integer.parseInt(args[9]), Integer.parseInt(args[10]));
-
+        System.out.println(sender);
+        sender.readFile.start();
         sender.accept.start();
         sender.connect.start();
-        new Thread(sender.readFile).start();
     }
 
     /**
@@ -193,15 +199,16 @@ public class Sender {
     private void sendMessage(Message msg) {
         if (msg.getContentLength() < mss && msg.getContentLength() != 0) {
             part = msg.getContentLength();
+            logger.warn("即将结束：文件末尾出现:{},目前窗口:left:{},byteHasSent:{},right:{}---当前包序号：{}", part, left, byteHasSent, right, msg.getSequence());
         }
-        // 如果getDrop()函数返回true，就丢包
+
         boolean isDrop = false;
-        // 如果该packet是data packet才有可能丢包
+        // data packet才丢包
         if (msg.getContentLength() != 0) {
             isDrop = getDrop();
         }
+
         if (!isDrop) {
-            // 获取要发送的packet
             byte[] pack = msg.enMessage();
             try {
                 DatagramPacket sendPac = new DatagramPacket(pack, pack.length,
@@ -210,9 +217,11 @@ public class Sender {
                 msg.setTime(Calendar.getInstance().getTimeInMillis());
                 Thread.sleep(delay);
                 datagramSocket.send(sendPac);
-                logger.info("发送：已经发送sequence：{}", msg.getSequence());
+                logger.debug("发送：已经发送sequence：{}，本次延时{}", msg.getSequence(), delay);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
+                logger.error("发送:发送数据包出现故障，sequence：{}", msg.getSequence());
+                System.exit(-1);
             }
         } else {
             logger.debug("发送：sequence丢包：{}", msg.getSequence());
@@ -231,7 +240,7 @@ public class Sender {
             return Message.deMessage(acceptBuffer);
         } catch (IOException e) {
             e.printStackTrace();
-            logger.error("接受数据异常，程序退出");
+            logger.error("接受:接受数据异常，程序退出");
             System.exit(-1);
         }
         return new Message();
@@ -250,7 +259,6 @@ public class Sender {
      */
     private int getDelay() {
         int time = (int) ((pDelay <= 0) ? 0 : max(0, randomDelay.nextDouble() - 1.0 + pDelay) / pDelay * maxDelay);
-        logger.debug("本次延迟时间{}", time);
         return time;
     }
 
@@ -259,7 +267,6 @@ public class Sender {
      */
     private boolean getDrop() {
         boolean b = (pDrop > 0) && randomDrop.nextDouble() < pDrop;
-        logger.debug("本次丢包情况:{}", b ? "丢包" : "不丢包");
         return b;
     }
 
@@ -267,11 +274,11 @@ public class Sender {
      * 用于建立连接。
      */
     class Connect extends Thread {
-        private final String lock = "";
+        private final String locks = "";
 
         void reRun() {
-            synchronized (lock) {
-                lock.notifyAll();
+            synchronized (locks) {
+                locks.notifyAll();
             }
         }
 
@@ -300,7 +307,7 @@ public class Sender {
         private Message setACKMessage() {
             Message message = new Message();
             message.setACK(true);
-            message.setSYN(false);
+            message.setSYN(true);
             message.setSequence(toSendSequence);
             message.setAcknolegment(toSendAcknolegment);
             message.setContent(new byte[]{});
@@ -309,31 +316,33 @@ public class Sender {
 
         @Override
         public void run() {
-            logger.debug("Connect run()!");
+            logger.info("Connect run()!");
             // 只要连接还没有建立，就一直尝试建立连接
             while (senderState != SenderState.ESTABLISHED) {
                 // 发送"连接请求报文"，即SYN packet
                 sendMessage(setSYNMessage(seqNum++));
-                logger.debug("Sender: send SYN.");
+                logger.debug("发送: 发送了SYN.");
                 if (senderState != SenderState.SYN_SENT) {
                     changeState(SenderState.SYN_SENT);
                 }
                 try {
-                    synchronized (lock) {
+                    synchronized (locks) {
                         lock.wait(initalTimeout);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
             sendMessage(setACKMessage());
-            logger.debug("Sender: send ACK.");
+            logger.debug("发送: 发送了ACK.");
             // 连接已经建立，可以传输文件了
             transfer = new Transfer();
             transfer.start();
-            new CleanList().start();
+            cleanList = new CleanList();
+            cleanList.setDaemon(true);
+            cleanList.start();
         }
-
     }
 
     /**
@@ -343,9 +352,6 @@ public class Sender {
         @Override
         public void run() {
             logger.debug("Accept run()!");
-
-            // 记录重复收到的ACK数量
-            int duplicateACK = 1;
 
             while (true) {
                 Message response = receiveMessage();
@@ -358,45 +364,55 @@ public class Sender {
                     connect.reRun();
                 } else if (response.isACK() && senderState == SenderState.ESTABLISHED) {
                     // 收到的包是数据包
-                    //确认包
                     int ackReply = response.getAcknolegment();
+                    logger.info("接受：收到确认包:{}", ackReply);
 
-                    if (left + mss < ackReply) {
+                    if ((part > 0 && (left + part == ackReply))
+                            || left + mss < ackReply) {
                         synchronized (lock) {
                             if (!hasConfirmed.contains(ackReply)) {
                                 hasConfirmed.add(ackReply);
                             }
                         }
-
                     } else if (left + mss == ackReply) {
-                        left = ackReply;
                         synchronized (lock) {
+                            left = left + mss;
+                            if (fileLength >= right + mss) {
+                                right = right + mss;
+                            } else {
+                                right = fileLength;
+                            }
                             while (hasConfirmed.contains(left + mss)) {
                                 left += mss;
-                                if (fileLength >= left + mws) {
-                                    right = left + mws;
+                                logger.debug("左边更新left:{}，right:{}", left, right);
+                                if (fileLength >= right + mss) {
+                                    right = right + mss;
                                 } else {
                                     right = fileLength;
                                 }
+                                logger.debug("右边更新left:{}，right:{}", left, right);
                             }
                         }
-                    } else if (left != ackReply) {
-                        logger.error("?????");
-//                        System.exit(-1);
+                    } else if (left - part != ackReply && left != ackReply) {
+                        logger.error("接受：回复包出现问题：{}---{}---{}===ackReply：{}", left, byteHasSent, right, ackReply);
+                        logger.error("====?????====");
                     }
 
-                    if (hasConfirmed.contains(left + part)) {
-                        logger.warn("================{}=======", part);
-                        left += part;
-                        if (fileLength >= left + part) {
-                            right = left + part;
-                        } else {
+                    synchronized (lock) {
+                        if (part != -1 && hasConfirmed.contains(left + part)) {
+                            left += part;
+                            logger.debug("左边更新{}---{}", left, right);
                             right = fileLength;
+                            logger.debug("右边更新{}---{}", left, right);
+                            partSendWindow.remove(ackReply - part);
+                            part = -1;
+                        } else if (ackReply == fileLength) {
+                            partSendWindow.remove(ackReply - part);
+                        } else {
+                            partSendWindow.remove(ackReply - mss);
                         }
                     }
-                    partSendWindow.remove(ackReply - mss);
-                    logger.info("接受：收到确认包:{}", ackReply);
-                    logger.debug("接受：目前窗口情况：left:{},byteHasSent:{},right:{}", left, byteHasSent, right);
+                    logger.debug("接受：目前窗口情况：{}---{}---{}", left, byteHasSent, right);
 
                 } else if (response.isFIN()) {
                     //收到包是终止包
@@ -424,7 +440,7 @@ public class Sender {
             // 初始化滑动窗口的左右两边
             left = 0;
             right = mws > fileLength ? fileLength : mws;
-            logger.debug("发送：初始化滑动窗口，left：{}，right：{}，mws：{}", left, right, mws);
+            logger.debug("发送：初始化滑动窗口，{}---{},mws:{}", left, right, mws);
             toSendSequence = 0;
         }
 
@@ -460,9 +476,9 @@ public class Sender {
 
             @Override
             public void run() {
-                if (partSendWindow.containsKey(x)) {
+                if (partSendWindow.containsKey(x) && left < right) {
                     Transfer.this.transmit(x);
-                    logger.warn("重传次数：{}", n++);
+                    logger.warn("{}重传次数：{}", x, n++);
                 } else {
                     ScheduledFuture<?> future = threadPools.remove(x);
                     future.cancel(true);
@@ -480,7 +496,7 @@ public class Sender {
             Message message = new Message();
             message.setFIN(true);
             message.setSequence(toSendSequence);
-            message.setContent(new byte[]{0});
+            message.setContent(new byte[]{});
             message.setTime((new Date()).getTime());
             logger.warn("fin包已经准备！！");
             return message;
@@ -496,11 +512,11 @@ public class Sender {
                     sendMessage(setFINMessage());
                     logger.error("========发送完毕！！！=========");
                 }
-
-                //logger.debug("{}",hasConfirmed);
-                while (byteHasSent < right && partSendWindow.size() < wd) {
-                    sendMessageBySequence(byteHasSent);
-                    logger.info("发送： 窗口：{}-{}-{}", left, byteHasSent, right);
+                synchronized (lock) {
+                    while (left < right && byteHasSent < right && partSendWindow.size() < wd) {
+                        sendMessageBySequence(byteHasSent);
+                        logger.info("发送：窗口：{}-{}-{}", left, byteHasSent, right);
+                    }
                 }
             }
         }
@@ -510,7 +526,7 @@ public class Sender {
      * 用于切片文件
      */
     @AllArgsConstructor
-    class ReadFile implements Runnable {
+    class ReadFile extends Thread {
         @Override
         public void run() {
             try (BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(filePath))) {
@@ -530,6 +546,9 @@ public class Sender {
         }
     }
 
+    /**
+     * 清除窗口已经确认的块列表
+     */
     class CleanList extends Thread {
         @Override
         public void run() {
