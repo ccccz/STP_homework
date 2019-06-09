@@ -15,57 +15,81 @@ public class Message {
     public static final int CRC_LENGTH = 2;
     public static final int HEAD_LENGTH = 29;
     private static final int CLEAN = 0xff;
-    /**
-     * 源端口号
-     */
-    private int srcPort;
+
     /**
      * 目地端口号
      */
-    private int disPort;
+    private int disPort=0;
     /**
      * 本包的序号
      */
-    private int sequence;
+    private int sequence=0;
     /**
      * 数据包的确认号，是下一个发送的值
      */
-    private int acknolegment;
+    private int acknolegment=0;
     /**
      * ACK flag
      */
-    private boolean ACK;
+    private boolean ACK=false;
     /**
      * 复位
      */
-    private boolean RST;
+    private boolean RST=false;
     /**
      * SYN flag
      */
-    private boolean SYN;
+    private boolean SYN=false;
     /**
      * FIN flag
      */
-    private boolean FIN;
-    private short window;
+    private boolean FIN=false;
+    private short window=0;
     /**
      * 数据最大长度字节: 1500 - 20(IP) - 8 (UDP) = 1472  short:32768‬
      */
-    private short mss;
-    private long time;  // todo:发送时间，发送前设置，isDelay前
+    private short mss=0;
+    private long time=0;  // todo:发送时间，发送前设置，isDelay前
     /**
      * 本包装载的数据长度
      */
-    private short contentLength;
+    private short contentLength=0;
     /**
      * 本包装载的数据
      */
-    private byte[] content;
+    private byte[] content=new byte[0];
 
     /**
      * 本包数据的校验码
      */
-    private byte[] crc16;
+    private byte[] crc16=new byte[16];
+
+    /**
+     * 新建一个Message对象
+     */
+    public Message(){
+
+    }
+
+    public Message(int disPort,int sequence,
+                   int acknolegment,boolean ACK,boolean RST,
+                   boolean SYN,boolean FIN,short window,
+                   short mss,long time,short contentLength,
+                   byte[] content,byte[] crc16){
+        this.setDisPort(disPort);
+        this.setSequence(sequence);
+        this.setAcknolegment(acknolegment);
+        this.setACK(ACK);
+        this.setRST(RST);
+        this.setSYN(SYN);
+        this.setFIN(FIN);
+        this.setWindow(window);
+        this.setMss(mss);
+        this.setTime(time);
+        this.setContentLength(contentLength);
+        this.setContent(content);
+        this.setCrc16(crc16);
+    }
 
     /**
      * 将Message对象实例转换为byte[]数组
@@ -79,8 +103,8 @@ public class Message {
         byte[] head = new byte[HEAD_LENGTH];
         Arrays.fill(head, (byte) 0);
 
-        head[0] = (byte) ((srcPort >>> 8) & CLEAN);
-        head[1] = (byte) (srcPort & CLEAN);
+//        head[0] = (byte) 0;
+//        head[1] = (byte) 0;
 
         head[2] = (byte) ((disPort >>> 8) & CLEAN);
         head[3] = (byte) (disPort & CLEAN);
@@ -148,7 +172,7 @@ public class Message {
      */
     static Message deMessage(byte[] message) {
         Message m = new Message();
-        m.setSrcPort(((message[0] & CLEAN) << 8) | message[1] & CLEAN);
+//        m.setSrcPort(((message[0] & CLEAN) << 8) | message[1] & CLEAN);
         m.setDisPort(((message[2] & CLEAN) << 8) | message[3] & CLEAN);
         m.setSequence(((message[4] & CLEAN) << 24) | ((message[5] & CLEAN) << 16) | ((message[6] & CLEAN) << 8) | (message[7] & CLEAN));
         m.setAcknolegment(((message[8] & CLEAN) << 24) | ((message[9] & CLEAN) << 16) | ((message[10] & CLEAN) << 8) | (message[11] & CLEAN));
@@ -169,9 +193,15 @@ public class Message {
         m.setCrc16(crc);
 
         // TODO: 2019-06-03 如果收到的packet中data字段为空呢？
-        byte[] con = new byte[m.getContentLength()];
-        System.arraycopy(message, HEAD_LENGTH, con, 0, m.getContentLength());
-        m.setContent(con);
+        if (m.getContentLength()==0){
+            byte[] con = new byte[m.getContentLength()];
+            m.setContent(con);
+        }else{
+            byte[] con = new byte[m.getContentLength()];
+            System.arraycopy(message, HEAD_LENGTH, con, 0, m.getContentLength());
+            m.setContent(con);
+        }
+
 
         // TODO: 2019-06-04 这里的方法有问题：获取dataContent好像不太对
         logger.debug("接收到报文，数据内容长度:{},报文序号{},报文确认号{},SYN:{},ACK:{},FIN:{}", m.contentLength, m.getSequence(),
@@ -195,10 +225,6 @@ public class Message {
 
     public byte[] getCrc16(){
         return this.crc16;
-    }
-
-    public void setSrcPort(int srcPort) {
-        this.srcPort = srcPort;
     }
 
     public void setDisPort(int disPort) {
@@ -257,10 +283,6 @@ public class Message {
         return CLEAN;
     }
 
-    public int getSrcPort() {
-        return srcPort;
-    }
-
     public int getDisPort() {
         return disPort;
     }
@@ -312,16 +334,5 @@ public class Message {
     public boolean isSYNACK() {
         return SYN && ACK;
     }
-
-
-//    public static byte[] hexStringToByteArray(String s) {
-//        int len = s.length();
-//        byte[] data = new byte[len / 2];
-//        for (int i = 0; i < len; i += 2) {
-//            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-//                                 + Character.digit(s.charAt(i+1), 16));
-//        }
-//        return data;
-//    }
 
 }

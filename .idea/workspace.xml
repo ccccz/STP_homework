@@ -3,16 +3,193 @@
   <component name="ChangeListManager">
     <list default="true" id="bd858dfe-e52b-44d1-b656-61cf8903ec5c" name="Default Changelist" comment="无能为力版">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/receive.txt" beforeDir="false" afterPath="$PROJECT_DIR$/receive.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Receiver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Sender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/CRC16.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CRC16.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Message.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Receiver.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Receiver.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ReceiverState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ReceiverState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Transfer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender$Transfer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Transfer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Sender$Transfer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SenderState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/SenderState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Receiver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ReceiverState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Accept.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Connect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Transfer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender$Transfer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Sender.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/SenderState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/log4j.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/log4j.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/中缀表达式求值   入口：Infix.java/Expression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/中缀表达式求值   入口：Infix.java/Infix.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/中缀表达式求值   入口：Infix.java/Stacks.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/多项式加法   入口：Polynomial.java/ListNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/多项式加法   入口：Polynomial.java/Polynomial.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/多项式加法   入口：Polynomial.java/PolynomialList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/排列组合   入口：Combine.java/Combine.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/汉诺塔   入口：Hanoi.java/Hanoi.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/约瑟夫问题    入口：array和list/JosephusArray.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/约瑟夫问题    入口：array和list/JosephusList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/171250013 常卓 数据结构/约瑟夫问题    入口：array和list/ListNode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/Arr and Matr.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/Chapter4 作业.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/Chapter4 作业.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/Chapter4.1 作业.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/Chapter5-8作业.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/Chapter5-8作业.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/OPENING.PPT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter1.PPT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter2    算法分析.PPT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter3.1 .ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter3.1.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter3.PPT" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter4.1.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter4.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter5.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter6.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter7.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter8.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/chapter9.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/数据结构课后习题.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../数据结构/算法整理.pages" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec1 引言、概率论基本概念、古典概型.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec2 几何概型、条件概率.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec3 离散型随机变量.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec4 几个典型的离散型随机变量.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec5 条件期望、方差.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec6 概率化方法.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../概率论/lec7 连续型随机变量.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/1-1、线性代数简介.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/1-2、n阶行列式.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/1-3、行列式性质及计算.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/1-4、行列式拓展.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/1-5、克莱姆法则.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/1-6、行列式性质证明.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-1、矩阵定义及矩阵运算.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-2、分块矩阵.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-3、逆矩阵定义和公式.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-4、初等变换与矩阵的秩.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-5、初等变换求逆矩阵.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-6、线性相关与线性无关.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/2-7、极大无关组与向量组的秩.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/3-1、方程组的有解性判定.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/3-2、方程组解的结构.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题一补充讲解3#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题三补充讲解(1)1#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题三补充讲解(2)2#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题三补充讲解(3)2#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题二补充讲解(1)1#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题二补充讲解(2)3#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题二补充讲解(3)5#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/习题二补充讲解(4)7#.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/关于课程作业.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/第1次作业分析0912.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/第2次作业分析0919.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/第3次作业分析0926.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/第4次作业分析1010.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/线性代数作业分类A.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../线性代数/线性代数复习1.pptx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/DLX套件.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/MinGW.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/MinGW.rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/VC+NewSwap.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/VC+Swap.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/VC6.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/VC_VS_Debug.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/gbd.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第10章 机器语言程序设计.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第11章 汇编语言.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第12章 输入和输出.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第13章 自陷例程和中断.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第14章 子例程.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第15章 函数.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第16章 指针和数组.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第17章 递归.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第1章 引言.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第2章 C程序设计简介.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第3章 类型和变量.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第4章 结构化程序设计和控制结构.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第5章 测试和调试.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第6章 数据的机器级表示.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第7章 数字逻辑电路.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第8章 冯•诺依曼模型.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/第9章 指令集结构.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/计算系统基础-复习-upload.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/计算系统基础-导引.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/附1 文件IO.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/附2 结构体.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计算系统基础/附3 链表.ppt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework01.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework03.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework04.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework05.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_homework07.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture00.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture01.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture03.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture04.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture05.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture07.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture08.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/COA18_lecture09.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw01.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw03.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw04.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw05.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/Hw07.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../计组/[计算机组成与体系结构性能设计(原书第8版)].pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/00 - Overview.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/01 - 编程语言概述.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/02 - 编程基础 I-分解与抽象.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/03 - 编程基础 II-可计算性.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/04 - 编程基础 III-Lambda演算.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/05 - 编程基础 IV-函数式编程范式.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/06 - 结构化编程 I - 思想.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/07 - 结构化编程 II - 变量.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/08 - 结构化编程 III - 方法.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/09 - 面向对象编程 I-思想.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/10 - 面向对象编程 II-封装.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/11 - 面向对象编程 III-协作.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/12 - 软件工程建模.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/13 - JVM和字节码基础.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/14 - 面向对象编程 III-继承与多态.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/15 - 面向对象编程 IV-可修改性.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/16 - 面向对象编程 V-接口.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/17 - 异常.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/18 - Network and Thread.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/19软件开发概述2018.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/G-Git.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Graphical user interface.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/J-Java编程基础.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Java练习题.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/P-Python编程基础.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Python-Basics-01.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Python-Basics-02.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Python-Basics-05.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Python-Basics-06.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Python-Basics-07.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/Z-总结.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/allcode.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/byte-of-python-chinese-edition.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/java.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/javaIDE.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/py.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/pyIDE.PNG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/sicp-in-python英文版.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/sicp-py中文版.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/导入Java项目运行JUnit.rar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/导入Java项目运行JUnit/eclipse.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/导入Java项目运行JUnit/idea.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/让我们谈谈lambda演算.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算1/软件工程书单.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算2/demo/3228cec510604b4f81d9ea31a12fa16f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../软件工程与计算2/新建文件夹/testproject" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -29,96 +206,93 @@
     <favorites_list name="test" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.43367347">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152">
-                  <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
-                  <folding>
-                    <element signature="e#18592#20012#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1501">
-                  <caret line="182" selection-start-line="182" selection-end-line="182" />
-                  <folding>
-                    <element signature="e#3836#5776#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="242">
-                  <caret line="423" column="24" selection-start-line="423" selection-start-column="24" selection-end-line="423" selection-end-column="24" />
-                  <folding>
-                    <element signature="e#3262#3412#0" expanded="true" />
-                    <element signature="e#6578#7332#0" expanded="true" />
-                    <element signature="e#7338#7656#0" expanded="true" />
-                    <element signature="e#7662#8076#0" expanded="true" />
-                    <element signature="e#8082#8446#0" expanded="true" />
-                    <element signature="class#ReceiverState#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="130">
-                  <caret line="218" column="5" lean-forward="true" selection-start-line="218" selection-start-column="5" selection-end-line="218" selection-end-column="5" />
-                  <folding>
-                    <element signature="e#3262#3412#0" expanded="true" />
-                    <element signature="e#6578#7332#0" expanded="true" />
-                    <element signature="e#7338#7656#0" expanded="true" />
-                    <element signature="e#7662#8076#0" expanded="true" />
-                    <element signature="e#8082#8446#0" expanded="true" />
-                    <element signature="class#ReceiverState#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="488">
-                  <caret line="698" column="14" selection-start-line="698" selection-start-column="14" selection-end-line="698" selection-end-column="14" />
-                  <folding>
-                    <element signature="e#14757#17108#0" expanded="true" />
-                    <element signature="e#18592#20012#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="19">
-                  <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="278" column="12" selection-start-line="278" selection-start-column="12" selection-end-line="278" selection-end-column="32" />
+              <folding>
+                <element signature="e#3266#3282#0" />
+                <element signature="e#4198#5169#0" />
+                <element signature="e#5172#5953#0" />
+                <element signature="e#7724#8633#0" />
+                <element signature="e#8168#8169#0" expanded="true" />
+                <element signature="e#8205#8206#0" expanded="true" />
+                <element signature="e#8254#8255#0" expanded="true" />
+                <element signature="e#8289#8290#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/file.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="222" column="12" selection-start-line="222" selection-start-column="12" selection-end-line="222" selection-end-column="32" />
+              <folding>
+                <element signature="docComment;field#fileOutputStream#0;class#Receiver#0" />
+                <element signature="docComment;field#byteHasWrite#0;class#Receiver#0" />
+                <element signature="docComment;field#toSendSequence#0;class#Receiver#0" />
+                <element signature="docComment;field#toSendAcknolegment#0;class#Receiver#0" />
+                <element signature="method#main#0;class#Receiver#0" />
+                <element signature="e#2594#2612#0" />
+                <element signature="method#establish#0;class#Receiver#0" />
+                <element signature="e#3408#3460#0" />
+                <element signature="method#receiveAllMessage#0;class#Receiver#0" />
+                <element signature="e#4597#4697#0" />
+                <element signature="method#sendFinMessage#0;class#Receiver#0" />
+                <element signature="docComment;method#getDelay#0;class#Receiver#0" />
+                <element signature="method#getDelay#0;class#Receiver#0" />
+                <element signature="docComment;method#getDrop#0;class#Receiver#0" />
+                <element signature="method#getDrop#0;class#Receiver#0" />
+                <element signature="e#10101#10102#0" expanded="true" />
+                <element signature="e#10197#10198#0" expanded="true" />
+                <element signature="docComment;method#Receiver#0;class#Receiver#0" />
+                <element signature="method#Receiver#0;class#Receiver#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/receive.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="1" column="16" lean-forward="true" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-292">
+              <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -150,9 +324,14 @@
       <find>sequence：</find>
       <find>send</find>
       <find>right</find>
+      <find>final</find>
+      <find>logger.debug</find>
+      <find>filePi</find>
     </findStrings>
     <replaceStrings>
       <replace>CLEAN</replace>
+      <replace>static</replace>
+      <replace>System.out.println</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -169,11 +348,12 @@
         <option value="$USER_HOME$/.m2/settings.xml" />
         <option value="$PROJECT_DIR$/debug.log" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
-        <option value="$PROJECT_DIR$/file.txt" />
         <option value="$PROJECT_DIR$/.ignore" />
         <option value="$PROJECT_DIR$/src/main/resources/log4j.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/Message.java" />
+        <option value="$PROJECT_DIR$/receive.txt" />
+        <option value="$PROJECT_DIR$/file.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Receiver.java" />
         <option value="$PROJECT_DIR$/src/main/java/Sender.java" />
       </list>
     </option>
@@ -186,9 +366,10 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="939" />
+    <option name="width" value="987" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -196,18 +377,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="test" type="58d84e3e:PackageViewProjectNode" />
-              <item name="test" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
+      <pane id="Course" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -231,20 +401,38 @@
               <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="test" type="b2602c69:ProjectViewProjectNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Course" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="test" type="58d84e3e:PackageViewProjectNode" />
+              <item name="test" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559389404334" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559898090722" />
     <property name="extract.method.default.visibility" value="packageLocal" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -275,7 +463,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Sender">
+  <component name="RunManager" selected="Application.Receiver">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="test" />
@@ -286,7 +474,7 @@
     <configuration name="Receiver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Receiver" />
       <module name="test" />
-      <option name="PROGRAM_PARAMETERS" value="receive.txt 127.0.0.1 6666 0.2 1234 200 0.1 5678" />
+      <option name="PROGRAM_PARAMETERS" value="receive.txt 127.0.0.1 6666 0.1 1234 200 0.2 5678" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -294,15 +482,15 @@
     <configuration name="Sender" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Sender" />
       <module name="test" />
-      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 6666 0.2 1077 200 0.1 5678 8 32 500" />
+      <option name="PROGRAM_PARAMETERS" value="file.txt 127.0.0.1 6666 0.1 1077 200 0.2 5678 8 32 500" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Sender" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.Receiver" />
+      <item itemvalue="Application.Sender" />
     </list>
     <recent_temporary>
       <list>
@@ -412,7 +600,7 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="142411000" />
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -422,10 +610,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15379113" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18593371" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -436,22 +623,22 @@
       <window_info id="DB Browser" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3278496" />
-      <window_info anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" weight="0.37250292" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.36192715" />
+      <window_info active="true" anchor="bottom" auto_hide="true" id="Run" order="2" sideWeight="0.49636218" visible="true" weight="0.3623446" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35523978" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32902467" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3285968" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="7" />
       <window_info anchor="bottom" id="MyBatis Sql Log" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.54031116" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.41563055" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5028612" side_tool="true" weight="0.32549942" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5028612" side_tool="true" weight="0.3250444" />
       <window_info anchor="bottom" id="Run with VisualVM" order="12" weight="0.40876946" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.3285968" />
       <window_info anchor="bottom" id="JRebel Executor" order="15" />
       <window_info anchor="bottom" id="JRebel Console" order="16" side_tool="true" weight="0.32956153" />
-      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.49713877" weight="0.32549942" />
+      <window_info anchor="bottom" id="Messages" order="17" sideWeight="0.49713877" weight="0.3232682" />
       <window_info anchor="bottom" id="Debug with VisualVM" order="18" weight="0.19094767" />
       <window_info anchor="bottom" id="Tail" order="19" />
       <window_info anchor="bottom" id="SonarLint" order="20" />
@@ -462,7 +649,7 @@
       <window_info anchor="bottom" id="Statistic" order="25" weight="0.3278496" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24874792" />
       <window_info anchor="right" id="Maven" order="3" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="RestServices" order="5" />
@@ -526,6 +713,46 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
     <MESSAGE value="edit" />
@@ -537,16 +764,16 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Sender.java</url>
-          <line>700</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Receiver.java</url>
+          <line>157</line>
           <properties />
-          <option name="timeStamp" value="2" />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Sender.java</url>
-          <line>542</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Receiver.java</url>
+          <line>167</line>
           <properties />
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -598,16 +825,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="745" column="16" selection-start-line="745" selection-start-column="16" selection-end-line="745" selection-end-column="16" />
-          <folding>
-            <element signature="e#27410#27958#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/lang/Thread.java" />
     <entry file="file://$PROJECT_DIR$/debug.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -618,37 +836,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/net/DatagramSocket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="657" column="22" selection-start-line="657" selection-start-column="22" selection-end-line="657" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="4" column="14" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.26/slf4j-log4j12-1.7.26-sources.jar!/org/slf4j/impl/Log4jLoggerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7486">
-          <caret line="538" selection-start-line="538" selection-end-line="538" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1501">
-          <caret line="182" selection-start-line="182" selection-end-line="182" />
-          <folding>
-            <element signature="e#3836#5776#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_191.jdk/Contents/Home/src.zip!/java/net/DatagramSocket.java" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-log4j12/1.7.26/slf4j-log4j12-1.7.26-sources.jar!/org/slf4j/impl/Log4jLoggerAdapter.java" />
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -656,45 +845,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/file.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        <state relative-caret-position="22">
+          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/receive.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/CRC16.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
+        <state relative-caret-position="330">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/file.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Message.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-292">
+          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Sender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="23" column="21" lean-forward="true" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
+        <state relative-caret-position="290">
+          <caret line="278" column="12" selection-start-line="278" selection-start-column="12" selection-end-line="278" selection-end-column="32" />
           <folding>
-            <element signature="e#18592#20012#0" expanded="true" />
+            <element signature="e#3266#3282#0" />
+            <element signature="e#4198#5169#0" />
+            <element signature="e#5172#5953#0" />
+            <element signature="e#7724#8633#0" />
+            <element signature="e#8168#8169#0" expanded="true" />
+            <element signature="e#8205#8206#0" expanded="true" />
+            <element signature="e#8254#8255#0" expanded="true" />
+            <element signature="e#8289#8290#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Receiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="423" column="24" selection-start-line="423" selection-start-column="24" selection-end-line="423" selection-end-column="24" />
+        <state relative-caret-position="372">
+          <caret line="222" column="12" selection-start-line="222" selection-start-column="12" selection-end-line="222" selection-end-column="32" />
           <folding>
-            <element signature="e#3262#3412#0" expanded="true" />
-            <element signature="e#6578#7332#0" expanded="true" />
-            <element signature="e#7338#7656#0" expanded="true" />
-            <element signature="e#7662#8076#0" expanded="true" />
-            <element signature="e#8082#8446#0" expanded="true" />
-            <element signature="class#ReceiverState#0" />
+            <element signature="docComment;field#fileOutputStream#0;class#Receiver#0" />
+            <element signature="docComment;field#byteHasWrite#0;class#Receiver#0" />
+            <element signature="docComment;field#toSendSequence#0;class#Receiver#0" />
+            <element signature="docComment;field#toSendAcknolegment#0;class#Receiver#0" />
+            <element signature="method#main#0;class#Receiver#0" />
+            <element signature="e#2594#2612#0" />
+            <element signature="method#establish#0;class#Receiver#0" />
+            <element signature="e#3408#3460#0" />
+            <element signature="method#receiveAllMessage#0;class#Receiver#0" />
+            <element signature="e#4597#4697#0" />
+            <element signature="method#sendFinMessage#0;class#Receiver#0" />
+            <element signature="docComment;method#getDelay#0;class#Receiver#0" />
+            <element signature="method#getDelay#0;class#Receiver#0" />
+            <element signature="docComment;method#getDrop#0;class#Receiver#0" />
+            <element signature="method#getDrop#0;class#Receiver#0" />
+            <element signature="e#10101#10102#0" expanded="true" />
+            <element signature="e#10197#10198#0" expanded="true" />
+            <element signature="docComment;method#Receiver#0;class#Receiver#0" />
+            <element signature="method#Receiver#0;class#Receiver#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/receive.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="16" lean-forward="true" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
         </state>
       </provider>
     </entry>

@@ -24,20 +24,24 @@ import static java.lang.Math.max;
 public class Sender {
 	private static final Logger logger = LoggerFactory.getLogger(Sender.class);
 
-	@NonNull
 	private String filePath;  //文件路径
-	@NonNull
+
 	private String disIP;   //接收方程序的IP地址
-	private final int disPort;    //接收方程序的端口
-	private final double pDrop;    //丢包概率
-	private final int seedDrop;    //丢包随机数种子
-	private final int maxDelay;    //最大延迟
-	private final double pDelay;    //延迟率
-	private final int seedDelay;    //
-	private final int mss;     //最大分段
-	private final int mws;     //最大窗口大小
-	@NonNull
+	private static int disPort;    //接收方程序的端口
+	private static double pDrop;    //丢包概率
+	private static int seedDrop;    //丢包随机数种子
+	private static int maxDelay;    //最大延迟
+	private static double pDelay;    //延迟率
+	private static int seedDelay;    //
+	private static int mss;     //最大分段
+	private static int mws;     //最大窗口大小
+
+	private int srcPort;  //发送方端口
 	private int initalTimeout;     //初始的超时
+	private static final int TIMEOUT=2000;
+	ArrayList<byte[]> filePieces;
+	private SocketAddress des_address;
+
 
 	private int fileLength;  // 文件所含有的字节数
 	private SenderState senderState = SenderState.CLOSED;
@@ -52,7 +56,17 @@ public class Sender {
 	/**
 	 * Sender从Receiver接收到的确认号
 	 */
-//	private int receivedAcknolegment;
+	private int receivedAcknolegment;
+
+	/**
+	 * 序号
+	 */
+	private int sequence;
+
+	/**
+	 * 确认号，实际上不需要
+	 */
+	private int acknolegment;
 	/**
 	 * 滑动窗口的左侧
 	 */
@@ -63,7 +77,7 @@ public class Sender {
 	private int right;
 	private BufferedInputStream bufferedInputStream;
 	//	private byte[] window;
-	private HashMap<Integer, byte[]> hasSentButNotAcked = new HashMap<>();  // 存储已经发送的，但还没有收到确认的数据
+	private HashMap<Integer, byte[]> hasSentButNotAcked=new HashMap<>();  // 存储已经发送的，但还没有收到确认的数据
 
 //    /**
 //     * 窗口
@@ -89,7 +103,8 @@ public class Sender {
 	private int toSendSequence;
 	private int toSendAcknolegment;
 
-	private DatagramSocket datagramSocket;
+	DatagramSocket datagramSocket;
+	private DatagramSocket datagramSocket2;
 	private DatagramPacket inDatagramPacket;
 	private DatagramPacket outDatagramPacket;
 
@@ -98,6 +113,7 @@ public class Sender {
 	private boolean isNeedRetransmit;  // 是否需要快速重传
 	private int retransmitSequence;  // 需要快速重传的数据的第一个字节号
 
+	private Timer sendTimer;  // 计时器
 
 	public static void main(@NotNull String[] args) {
 		if (args.length != 11) {
@@ -109,15 +125,47 @@ public class Sender {
 				Double.parseDouble(args[3]), Integer.parseInt(args[4]), Integer.parseInt(args[5]),
 				Double.parseDouble(args[6]), Integer.parseInt(args[7]), Integer.parseInt(args[8]),
 				Integer.parseInt(args[9]), Integer.parseInt(args[10]));
+
+
 		sender.setRandomDelay(new Random((long) sender.seedDelay));
 		sender.setRandomDrop(new Random((long) sender.seedDrop));
-//		sender.window = new ArrayList<>(sender.mws);
-//		ThreadFactory f = new ThreadFactoryBuilder().setNameFormat("发送数据包-%d").build();
-//		sender.toSend = new ThreadPoolExecutor(sender.mws, sender.mws + 2, sender.getInitalTimeout(), TimeUnit.MILLISECONDS,
-//				new LinkedBlockingQueue<>(sender.mws), f);
-//		establish(sender);
+		sender.readFile();
+		sender.establish();
+
+		sender.sendAllMessage();
+		sender.closed();
+
+//		while(true){
+//			try {
+//				DatagramPacket datagramPacket=new DatagramPacket(new byte[1],1,InetAddress.getByName("localhost"),disPort);
+//				sender.datagramSocket.send(datagramPacket);
+//				Thread.sleep(10000);
+//				System.out.println("fabao!");
+//			} catch (UnknownHostException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
 	}
 
+	/**
+	 * 初始化
+	 * @param filePath
+	 * @param disIP
+	 * @param disPort
+	 * @param pDrop
+	 * @param seedDrop
+	 * @param maxDelay
+	 * @param pDelay
+	 * @param seedDelay
+	 * @param mss
+	 * @param mws
+	 * @param initalTimeout
+	 */
 	public Sender(@NonNull String filePath, @NonNull String disIP, int disPort, double pDrop, int seedDrop, int maxDelay, double pDelay, int seedDelay, int mss, int mws, @NonNull int initalTimeout) {
 		this.filePath = filePath;
 		this.disIP = disIP;
@@ -130,198 +178,226 @@ public class Sender {
 		this.mss = mss;
 		this.mws = mws;
 		this.initalTimeout = initalTimeout;
+		this.sequence=0;
+		this.acknolegment=23;
+		srcPort=60101;
+		filePieces=new ArrayList<>();
 
 		try {
 			datagramSocket = new DatagramSocket();
+//			datagramSocket2=new DatagramSocket();
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
-		Thread accept = new Accept();
-		accept.start();
-		Thread connect = new Connect();
-		connect.start();
-	}
-
-//	/**
-//	 * 发送消息
-//	 *
-//	 * @param message 准备发送的消息
-//	 * @return 收到的确认消息
-//	 * TODO: yh 这个方法有问题，可以抛弃重写
-//	 */
-//	private Message sendMessage(@NotNull Message message) {
-//		try (DatagramSocket socket = new DatagramSocket(0)) {
-//			socket.setSoTimeout(initalTimeout);
-//
-//			message.setSrcPort(socket.getPort());
-//			byte[] messByte = message.enMessage();
-//			DatagramPacket request = new DatagramPacket(messByte, messByte.length, InetAddress.getByName(disIP), this.disPort);
-//			socket.send(request);
-//
-//			DatagramPacket response = new DatagramPacket(new byte[mss + Message.HEAD_LENGTH], mss + Message.HEAD_LENGTH);
-//			socket.receive(response);
-//
-//			return Message.deMessage(response.getData());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			logger.error("遇到异常，程序意外终止");
-//			System.exit(-1);
-//		}
-//		return null;
-//	}
-
-	private void sendMessage() {
-		// 如果getDrop()函数返回true，就丢包
-		boolean isDrop = false;
-		// 如果该packet是data packet才有可能丢包
-		if (toSendMessage.getContentLength() != 0) {
-			isDrop = getDrop();
-		}
-		if (!isDrop) {
-			// 获取要发送的packet
-			toSendPacket = toSendMessage.enMessage();
-			try {
-				outDatagramPacket = new DatagramPacket(toSendPacket, toSendPacket.length,
-						new InetSocketAddress(disIP, disPort));
-				int delay = getDelay();
-				Thread.sleep(delay);
-				datagramSocket.send(outDatagramPacket);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	private void receiveMessage() {
-		byte[] buffer = new byte[1024];
-		inDatagramPacket = new DatagramPacket(buffer, buffer.length);
-		try {
-			datagramSocket.receive(inDatagramPacket);
-			acceptBuffer = inDatagramPacket.getData();
-			receivedMessage = Message.deMessage(acceptBuffer);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * 改变接收方状态
-	 */
-	private void changeState(SenderState s) {
-		this.senderState = s;
-		logger.info("客户端状态改变为{}", s);
-	}
-
-	/**
-	 * TODO: hl 获取预构造好的将发送的信息
-	 */
-	private Message getMessage() {
-		Message msg = new Message();
-		msg.setDisPort(this.disPort);
-		msg.setACK(true);
-		msg.setTime(Calendar.getInstance().getTimeInMillis());
-		return msg;
 	}
 
 	/**
 	 * 建立连接
-	 * TODO: yh 第一次握手和接收报文都没有问题，但第二次发送报文和之后还没有设计完成
-	 * TODO yh 羽涵辛苦了，可能需要设计一下收发包的策略
+	 * @return
 	 */
-//    private static void establish(Sender sender) {
-//        try (DatagramSocket socket = new DatagramSocket(0)) {
-//            socket.setSoTimeout(sender.initalTimeout);
+	public void establish(){
+
+		System.out.println("handShake No.1");
+
+		while(senderState != SenderState.ESTABLISHED){
+			sequence++;
+			Message message=new Message(disPort,sequence,acknolegment,false,false,true,false,(short) mws,(short)mss,new Date().getTime(),(short)0,new byte[0],CRC16.generateCRC(new byte[]{}));
+			sendMessage(message);
+
+			byte[] bytes=new byte[10000];
+			DatagramPacket datagramPacket=new DatagramPacket(bytes,bytes.length);
+			try {
+//				datagramSocket=new DatagramSocket();
+				datagramSocket.setSoTimeout(TIMEOUT);
+				datagramSocket.receive(datagramPacket);
+				des_address=datagramPacket.getSocketAddress();
+				bytes=datagramPacket.getData();
+				Message ackMessage=Message.deMessage(bytes);
+				if (message.isSYN()){
+					senderState=SenderState.ESTABLISHED;
+					System.out.println("sender ESTABLISHE!");
+				}
+			} catch (SocketTimeoutException e){
+//				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	/**
+	 * 读取文件
+	 */
+	private void readFile(){
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(filePath);
+			fileLength = fileInputStream.available();
+			bufferedInputStream = new BufferedInputStream(fileInputStream);
+			System.out.println("Sender: read file content. 文件长度："+fileLength+" Byte" );
+			int i=0;
+			for (i=0;i+mss<=fileLength;i=i+mss){
+				byte[] tempByte=new byte[mss];
+				bufferedInputStream.read(tempByte,0,mss);
+				filePieces.add(tempByte);
+			}
+			if (i<fileLength){
+				byte[] tempByte=new byte[fileLength-i];
+				bufferedInputStream.read(tempByte,0,fileLength-i);
+				filePieces.add(tempByte);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 发送Message
+	 * @param message
+	 */
+	public void sendMessage(Message message){
+		byte[] bytes=message.enMessage();
+		if (getDrop()){
+			return;
+		}
+
+//		//等待
+//		try {
+//			Thread.sleep(200);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+
+		int delay=getDelay();
+
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			DatagramPacket datagramPacket=new DatagramPacket(bytes,bytes.length,InetAddress.getByName("localhost"),disPort);
+//						Thread.sleep(500);
+			datagramSocket.send(datagramPacket);
+			System.out.println("send package "+sequence+" !");
+//						datagramSocket.close();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//		if (delay!=0){
+//			TimerTask timerTask=new TimerTask() {
+//				@Override
+//				public void run() {
+//					try {
+//						DatagramPacket datagramPacket=new DatagramPacket(bytes,bytes.length,InetAddress.getByName("localhost"),disPort);
+////						Thread.sleep(500);
+//						datagramSocket.send(datagramPacket);
+//						System.out.println("send package "+sequence+" !");
+////						datagramSocket.close();
+//					} catch (UnknownHostException e) {
+//						e.printStackTrace();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			};
 //
-//            STATE1:
-//            while (true) {
-//                //握手1
-//                //准备报文
-//                Message m = sender.getMessage();
-//                m.setACK(false);
-//                m.setSYN(true);
-//                m.setRank(sender.getSequence());
-//                m.setMss(m.getMss());
-//                m.setContent(new byte[0]);
-//                m.setSrcPort(socket.getPort());
-//                byte[] messByte = m.enMessage();
-//                if (sender.getDrop()) {
-//                    try {
-//                        Thread.sleep(sender.maxDelay);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    Sender.logger.info("该数据包丢失，重新发送...");
-//                    continue;
-//                }
-//                //发送报文
-//                long temp = Calendar.getInstance().getTimeInMillis();
-//                try {
-//                    Thread.sleep(sender.getDelay());
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                Message replyMess;
-//                DatagramPacket response;
-//                DatagramPacket request = new DatagramPacket(messByte, messByte.length, InetAddress.getByName(sender.disIP), sender.disPort);
-//                socket.send(request);
-//
-//                //接受报文
-//                while (true) {
-//                    if (Calendar.getInstance().getTimeInMillis() - temp >= sender.maxDelay) {
-//                        Sender.logger.info("该数据包超时，重新发送...");
-//                        continue STATE1;
-//                    }
-//
-//                    response = new DatagramPacket(new byte[sender.mss + Message.HEAD_LENGTH], sender.mss + Message.HEAD_LENGTH);
-//                    socket.receive(response);
-//                    replyMess = Message.deMessage(response.getData());
-//
-//                    //验证报文
-//                    if (!replyMess.isSYN() | !replyMess.isACK() | replyMess.getSeq() != sender.getSequence() + 1) {
-//                        logger.error("上述报文非同步报文");
-//                        continue;
-//                    }
-//                    break;
-//                }
-//
-//                //更新状态
-//                sender.changeState(SenderState.SYN_SENT);
-//                sender.setSequence(sender.getSequence() + 1);
-//                sender.setRcvdSequence(replyMess.getRank() + 1);
-//
-//                //握手3
-//                //准备报文
-//                m = sender.getMessage();
-//                m.setRank(sender.getSequence());
-//                m.setContent(new byte[0]);
-//                m.setSeq(sender.getRcvdSequence());
-//
-//                //发送报文
-//                sender.sendMessage(m);
-//
-//                //更新状态
-//                sender.changeState(SenderState.ESTABLISHED);
-//
-//                break;
-//            }
-//            logger.info("三次握手成功！连接建立完成！");
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            logger.error("遇到异常，程序意外终止");
-//            System.exit(-1);
-//        }
-//    }
+//			Timer timer=new Timer();
+//			timer.schedule(timerTask,delay);
+//		}else{
+//			try {
+//				DatagramPacket datagramPacket=new DatagramPacket(bytes,bytes.length,InetAddress.getByName("localhost"),disPort);
+////				Thread.sleep(500);
+//				datagramSocket.send(datagramPacket);
+//				System.out.println("send package "+sequence+" !");
+////						datagramSocket.close();
+//			} catch (UnknownHostException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+
+	}
+
+	/**
+	 * 发送所有数据
+	 */
+	public void sendAllMessage(){
+		boolean isOK=false;
+		for (int i=0;i<filePieces.size();i++){
+			isOK=false;
+			sequence++;
+			while(!isOK){
+//				sequence++;
+				Message message=new Message(disPort,sequence,acknolegment,false,false,false,false,(short) mws,(short)mss,new Date().getTime(),(short)0,filePieces.get(i),CRC16.generateCRC(filePieces.get(i)));
+				sendMessage(message);
+
+				byte[] bytes=new byte[10000];
+				DatagramPacket datagramPacket=new DatagramPacket(bytes,bytes.length);
+				try {
+//				datagramSocket=new DatagramSocket();
+					datagramSocket.setSoTimeout(TIMEOUT);
+					datagramSocket.receive(datagramPacket);
+					des_address=datagramPacket.getSocketAddress();
+					bytes=datagramPacket.getData();
+					Message ackMessage=Message.deMessage(bytes);
+					if (ackMessage.getSequence()==sequence){
+						System.out.println("package "+sequence+" is ok");
+						isOK=true;
+					}
+				} catch (SocketTimeoutException e){
+//				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 断开连接
+	 */
+	public void closed(){
+		sequence++;
+		while(senderState!=SenderState.CLOSED) {
+			Message message=new Message(disPort,sequence,acknolegment,false,false,false,true,(short) mws,(short)mss,new Date().getTime(),(short)0,new byte[0],CRC16.generateCRC(new byte[]{}));
+			sendMessage(message);
+
+			byte[] bytes=new byte[10000];
+			DatagramPacket datagramPacket=new DatagramPacket(bytes,bytes.length);
+			try {
+//				datagramSocket=new DatagramSocket();
+				datagramSocket.setSoTimeout(TIMEOUT);
+				datagramSocket.receive(datagramPacket);
+				bytes=datagramPacket.getData();
+				Message ackMessage=Message.deMessage(bytes);
+				if (ackMessage.isFIN()  && ackMessage.isACK()){
+					senderState=SenderState.CLOSED;
+					System.out.println("sender CLOSED!");
+					datagramSocket.close();
+				}
+			} catch (SocketTimeoutException e){
+//				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 
 	/**
 	 * @return 延迟时间
 	 */
 	private int getDelay() {
 		int time = (int) ((pDelay <= 0) ? 0 : max(0, randomDelay.nextDouble() - 1.0 + pDelay) / pDelay * maxDelay);
-		logger.debug("本次延迟时间{}", time);
+		System.out.println("本次延迟时间"+ time);
 		return time;
 	}
 
@@ -329,388 +405,17 @@ public class Sender {
 	 * @return true：丢包，false：不丢包
 	 */
 	private boolean getDrop() {
-//		boolean b = false;
 		boolean b = (pDrop > 0) && randomDrop.nextDouble() < pDrop;
-		logger.debug("本次丢包情况:{}", b ? "丢包" : "不丢包");
+		System.out.println("本次丢包情况"+( b ? "丢包" : "不丢包"));
 		return b;
 	}
 
-
-//    private void addSendThread(Sender sender, DatagramSocket socket, byte[] messByte) {
-//        int times = 0;
-//        while (times < 4) {
-//            //丢失直接等待
-//            if (sender.getDrop()) {
-//                try {
-//                    Thread.sleep(sender.maxDelay);
-//                    times++;
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                Sender.logger.info("该数据包丢失，重新发送...");
-//            }
-//            //延迟
-//            try {
-//                Thread.sleep(sender.getDelay());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            sender.window.add(new SendThread(sender, socket, messByte));
-//
-//        }
-//        Sender.logger.error("网络环境太差，请重新设置相关参数");
-//        System.exit(-1);
-//    }
-
-//    private void getResponseThread() throws IOException {
-//
-//    }
-
-	/**
-	 * 创建发送线程
-	 *
-	 */
-//    static class SendThread extends Thread {
-//        private Sender sender;
-//        private DatagramSocket socket;
-//        private byte[] messByte;
-//        private byte[] replyByte;
-//
-//        SendThread(Sender sender, DatagramSocket socket, byte[] messByte) {
-//            this.sender = sender;
-//            this.socket = socket;
-//            this.messByte = messByte;
-//            this.replyByte = new byte[sender.mss + Message.HEAD_LENGTH];
-//        }
-//
-//        @Override
-//        public synchronized void run() {
-//            super.run();
-//            long temp = Calendar.getInstance().getTimeInMillis();
-//            long delayTime = sender.getDelay();
-//            try {
-//                Thread.sleep(sender.getDelay());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//
-//            try {
-//                DatagramPacket request = new DatagramPacket(messByte, messByte.length, InetAddress.getByName(sender.disIP), sender.disPort);
-//                socket.send(request);
-//                sender.getResponseThread();
-//                if (delayTime < sender.maxDelay) {
-//                    wait(sender.maxDelay - delayTime);
-//                }
-//            } catch (IOException | InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
-	//TODO: sn 读取文件并转化为二进制
-	//TODO: dyh 发送消息策略
-
-
-	/**
-	 * 用于建立连接。只要连接还没有建立，就一直尝试建立连接。
-	 */
-	class Connect extends Thread {
-		@Override
-		public void run() {
-			logger.debug("Connect run()!");
-
-			// 只要连接还没有建立，就一直尝试建立连接
-			while (senderState != SenderState.ESTABLISHED) {
-				logger.info("Sender: senderState--{}", senderState);
-				// 发送"连接请求报文"，即SYN packet
-				setSYNMessage(seqNum++);
-				sendMessage();
-				logger.debug("Sender: send SYN.");
-				if (senderState != SenderState.SYN_SENT) {
-					changeState(SenderState.SYN_SENT);
-				}
-
-				// 在发送完一个SYN packet后，该线程等待2m，然后检查是否收到SYN ACK packet
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-
-				// 如果没有收到Receiver的回复，就继续发送"连接请求报文"
-				if (receivedMessage == null) {
-					continue;
-				}
-				// 如果没有收到SYNACK，就继续发送"连接请求报文"
-				if (!receivedMessage.isSYNACK()) {
-					continue;
-				}
-				// 如果收到了SYN ACK，就发送ACK
-				logger.debug("Sender: receive SYN ACK.");
-				toSendSequence = receivedMessage.getAcknolegment();
-				toSendAcknolegment = receivedMessage.getSequence() + 1;
-				setACKMessage();
-				sendMessage();
-//				changeState(SenderState.ESTABLISHED); 状态的改变不应该由Connect来，应该交给Accept
-				logger.debug("Sender: send ACK.");
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			// 连接已经建立，可以传输文件了
-			Thread transfer = new Transfer();
-			transfer.start();
-		}
-
-		/**
-		 * ACK = 0
-		 * SYN = 1
-		 * sequence = x
-		 * acknolegment = 0
-		 */
-		private void setSYNMessage(int seqNum) {
-			toSendMessage = new Message();
-			toSendMessage.setACK(false);
-			toSendMessage.setSYN(true);
-			toSendMessage.setSequence(seqNum);  // 这个随便取
-			toSendMessage.setAcknolegment(0);
-			toSendMessage.setContent(new byte[]{});
-			byte[] toSendCRC = CRC16.generateCRC(new byte[]{});
-			toSendMessage.setCrc16(toSendCRC);
-			toSendMessage.setTime((new Date()).getTime());
-		}
-
-		/**
-		 * ACK = 1
-		 * SYN = 0
-		 * sequence = x+1
-		 * acknolegment = y+1
-		 */
-		private void setACKMessage() {
-			toSendMessage = new Message();
-			toSendMessage.setACK(true);
-			toSendMessage.setSYN(false);
-			toSendMessage.setSequence(toSendSequence);
-			toSendMessage.setAcknolegment(toSendAcknolegment);
-			toSendMessage.setContent(new byte[]{});
-			byte[] toSendCRC = CRC16.generateCRC(new byte[]{});
-			toSendMessage.setCrc16(toSendCRC);
-			toSendMessage.setTime((new Date()).getTime());
-		}
+	public void setRandomDelay(Random randomDelay) {
+		this.randomDelay = randomDelay;
 	}
 
-	/**
-	 * 用于接收
-	 */
-	class Accept extends Thread {
-		@Override
-		public void run() {
-			logger.debug("Accept run()!");
-
-			int duplicateACK = 1;  // 记录重复收到的ACK数量
-
-			while (true) {
-//				logger.error("==================");
-				// 接收Receiver发送的数据
-				receiveMessage();
-
-//				logger.info("Sender: senderState--{}", senderState);
-
-				// 如果Sender接收到的packet是SYN ACK packet，那么就改变Sender状态为SYN_ACK
-				if (receivedMessage.isSYNACK() && senderState == SenderState.SYN_SENT && receivedMessage.getAcknolegment() == seqNum) {
-					logger.debug("Sender: receive SYN ACK.");
-					changeState(SenderState.ESTABLISHED);
-					// todo:改变状态，唤醒
-				} else if (receivedMessage.isACK() && senderState == SenderState.ESTABLISHED) {
-					// 如果Sender接收到的packet是ACK packet
-					// 如果收到的来自Receiver的acknolegment比Sender所记录的已经确认收到的ACK字节号大，说明Sender发送的数据都已经收到了
-//					logger.debug("Sender: receive ACK. byteHasAcked:{}, receivedMessage.getAcknolegment():{}",
-//							byteHasAcked,receivedMessage.getAcknolegment());
-					if (byteHasAcked < receivedMessage.getAcknolegment()) {
-						byteHasAcked = receivedMessage.getAcknolegment();  // 更新已经确认的ACK号
-						logger.debug("update byteHasAcked:{}", byteHasAcked);
-						// 移动滑动窗口的左侧
-						left = receivedMessage.getAcknolegment();
-						duplicateACK = 1;
-						// 移动滑动窗口的右侧
-						if (fileLength >= left + mws) {
-							right = left + mws;
-						} else {
-							right = left + fileLength - left;
-						}
-						logger.debug("left:{},right:{},byteHasSent:{}", left, right, byteHasSent);
-					}
-				} else if (receivedMessage.getAcknolegment() == byteHasAcked) {  // 收到重复的ACK Num确认号
-					duplicateACK++;
-					logger.debug("Sender: receive duplicate ACK{}.", duplicateACK);
-					if (duplicateACK >= 3 && receivedMessage.getAcknolegment() < fileLength) {
-						// 快速重传：
-						/*
-						 * 快速重传机制：基于接收端的反馈信息（ACK）来引发重传,而非重传计时器的超时。不以时间驱动，而以数据驱动重传。也就是说，如果，包没有连续到达，就ack
-						 * 最后那个可能被丢了的包，如果发送方连续收到3次相同的ack，就重传。Fast Retransmit的好处是不用等timeout了再重传。
-						 */
-						// TODO: 2019-06-03
-						// 重传packet
-						isNeedRetransmit = true;
-						retransmitSequence = receivedMessage.getAcknolegment();
-					}
-				} else if (receivedMessage.isFIN()) {
-					logger.debug("Sender: receive FIN.");
-					changeState(SenderState.CLOSED);
-					datagramSocket.close();
-					try {
-						bufferedInputStream.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					System.exit(0);
-				}
-			}
-		}
-	}
-
-	/**
-	 * 用于传输：把位于滑动窗口中的数据发送出去。当文件传输完毕后，发送FIN packet，关闭连接。
-	 */
-	class Transfer extends Thread {
-		private int lastSendSequence;
-		private byte[] toSendData;
-		ScheduledThreadPoolExecutor scheduled = new ScheduledThreadPoolExecutor(mws);
-		HashMap<Integer, Timer> timerHashMap = new HashMap<>();  // 存储各个包的Timer
-		//		TimerTask timerTask = new TimerTask() {
-//			@Override
-//			public void run() {
-//				logger.debug("===============================");
-////				for (int i = byteHasAcked; i <= right; i++) {
-////					retransmit(i);
-////				}
-//			}
-//		};
-		TimerTask timerTask;
-
-		private Timer timer;
-
-		Transfer() {
-			//todo：放入main
-			try {
-				FileInputStream fileInputStream = new FileInputStream(filePath);
-				fileLength = fileInputStream.available();
-				bufferedInputStream = new BufferedInputStream(fileInputStream);
-				logger.info("Sender: read file content. 文件长度：{} Byte", fileLength);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			// 初始化滑动窗口的左右两边
-			left = 0;
-			right = left + mws > fileLength ? fileLength : left + mws;
-			logger.debug("初始化滑动窗口，left：{}，right：{}，mws：{}", left, right, mws);
-		}
-
-		private void setDataMessage() {
-			toSendMessage = new Message();
-			toSendMessage.setACK(false);
-			toSendMessage.setSYN(false);
-			toSendMessage.setFIN(false);
-			toSendMessage.setRST(false);
-			toSendMessage.setSequence(toSendSequence);
-			toSendMessage.setContent(toSendData);//setCRC含在其中了
-			toSendMessage.setTime((new Date()).getTime());
-		}
-
-		private void sendMessageBySequence(int sequence) {
-			try {
-				int dataLength = sequence + mss <= right ? mss : right - sequence;
-				toSendData = new byte[dataLength];
-				bufferedInputStream.read(toSendData, 0, dataLength);
-				toSendSequence = sequence;
-				setDataMessage();
-				// 发送data packet
-				sendMessage();
-				hasSentButNotAcked.put(toSendSequence, toSendData);
-				byteHasSent += dataLength;
-
-				timer = new Timer();
-				timerHashMap.put(sequence, timer);  // 保存当前包的Timer
-				timerTask = new TimerTask() {
-					@Override
-					public void run() {
-//						logger.error("sequence:{},byteHasAcked:{}，byteHasSend:{},left:{},right:{}",sequence,byteHasAcked,
-//								byteHasSent,left,right);
-						if (sequence >= byteHasAcked) {
-							logger.error("===========sequence:{},byteHasAcked:{}," +
-											"byteHasSend:{},left:{},right:{}，timerHashMap:{}===========",
-									sequence, byteHasAcked,byteHasSent,left,right,timerHashMap);
-							retransmit(sequence);
-						}
-//						timerHashMap.keySet().forEach(
-//								key->{
-//									retransmit(key);
-//								}
-//						);
-//						if (sequence < left) {
-//							timerHashMap.get(sequence).cancel();
-//							timerHashMap.remove(sequence);
-//						}
-//						logger.debug("==========timerHashMap:{}",timerHashMap);
-					}
-				};
-				timer.schedule(timerTask, initalTimeout, initalTimeout);
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		private void retransmit(int sequence) {
-			toSendSequence = sequence;
-			toSendData = hasSentButNotAcked.get(sequence);
-//			logger.debug("retransmit sequence:{}", sequence);
-			setDataMessage();
-			sendMessage();
-			logger.debug("===========================已经重新发送sequence：{}", sequence);
-		}
-
-		private void setFINMessage() {
-			toSendMessage = new Message();
-			toSendMessage.setFIN(true);
-			toSendMessage.setSequence(toSendSequence);
-			toSendMessage.setContent(toSendData);
-			byte[] toSendCRC = CRC16.generateCRC(toSendData);
-			toSendMessage.setCrc16(toSendCRC);
-			toSendMessage.setTime((new Date()).getTime());
-		}
-
-		@Override
-		public void run() {
-			logger.debug("Transfer run()!");
-
-			while (senderState == SenderState.ESTABLISHED) {
-				// 如果文件发送完了，就发送FIN packet
-				if (byteHasAcked == fileLength) {
-					setFINMessage();
-					sendMessage();
-				}
-				// 将byteHasSent-right段的数据全部发送出去
-				// TODO: 2019-06-06 我发现一件很奇怪的事情：下面的这一行如果没有的话，程序就会出错。qiao，为什么？！
-			//	logger.debug("byteHasSent:{},byteHasAck:{},left:{},right:{}", byteHasSent, byteHasAcked, left, right);
-
-				while (byteHasSent < right) {
-					sendMessageBySequence(byteHasSent);
-					logger.debug("已经发送的字节数量：{}, 窗口：{}--{}", byteHasSent, left, right);
-				}
-//				do {
-//					sendMessageBySequence(byteHasSent);
-//				} while (byteHasSent < right);
-
-				// 根据指定的序列号重传数据
-//				if (isNeedRetransmit) {
-//					logger.info("快速重传：字节序号{}", retransmitSequence);
-//					retransmit(retransmitSequence);
-//				}
-			}
-		}
+	public void setRandomDrop(Random randomDrop) {
+		this.randomDrop = randomDrop;
 	}
 }
 
